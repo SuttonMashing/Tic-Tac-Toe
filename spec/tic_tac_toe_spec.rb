@@ -21,6 +21,13 @@ end
 describe "row finder" do
     it "gets row given index" do
         game = Game.new
-        expect(game.row_finder("C")).to eq(2) 
+        expect(game.row_finder("C1")).to eq(2) 
+    end
+end
+
+describe "column finder" do
+    it "gets column given index" do
+        game = Game.new
+        expect(game.col_finder("C1")).to eq(0) 
     end
 end
