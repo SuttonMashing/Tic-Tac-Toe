@@ -12,13 +12,13 @@ describe "Board" do
     it "places Cross in centre of board" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.move("B2", board, 0)).to eq([["","",""],["", "X", ""],["","",""]]) 
+        expect(game.move("B2", board, 0)).to eq([[["","",""],["", "X", ""],["","",""]], 1]) 
     end
 
     it "places Cross in bottom left" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.move("C1", board, 0)).to eq([["","",""],["", "", ""],["X","",""]]) 
+        expect(game.move("C1", board, 0)).to eq([[["","",""],["", "", ""],["X","",""]], 1]) 
     end
 
     it "if there is already a cross in B1, print invalid move" do
@@ -31,14 +31,14 @@ describe "Board" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
         expect(game.move("A1", board, 0)).to eq([[["X","",""],["","",""],["","",""]], 1]) 
-        expect(game.move("B2", board, 1)).to eq([[["X","",""],["","X",""],["","",""]], 2])  
-        expect(game.move("C3", board, 2)).to eq([[["X","",""],["","X",""],["","","X"]], 3]) 
+        expect(game.move("B2", board, 1)).to eq([[["X","",""],["","O",""],["","",""]], 2])  
+        expect(game.move("C3", board, 2)).to eq([[["X","",""],["","O",""],["","","X"]], 3]) 
     end
 
-    it "If turn = 1, return player 'O'" do
+    it "If counter = 1, place player 'O'" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.turn(1)).to eq("O") 
+        expect(game.move("A1", board, 1)).to eq([[["O","",""],["","",""],["","",""]], 2]) 
     end
 
     it "Increases counter by 1 for each move" do

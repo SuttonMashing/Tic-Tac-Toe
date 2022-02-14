@@ -3,11 +3,6 @@ class Game
     board = [["","",""],["","",""],["","",""]]
     counter = 0
 
-    def counter(counter)
-        return counter
-    end
-
-
     def move(position, board, counter)
         if position == ""
             return board
@@ -16,10 +11,14 @@ class Game
         row = row_finder(position) #use row finder to give row on board
         col = col_finder(position) #use col finder to give col on board
 
-        if board[row][col] == ""
+        if board[row][col] == "" && counter.even?
           board[row][col] = "X"  
           counter += 1
           return board, counter
+        elsif board[row][col] == "" && counter.odd?
+            board[row][col] = "O"  
+            counter += 1
+            return board, counter
           
         else 
             return "Invalid Move!"
@@ -31,14 +30,6 @@ class Game
 
     end
     
-    def turn(counter)
-        #player X starts
-        if counter.even?
-            return "X"
-        else 
-            return "O"
-        end
-    end
     
     def row_finder(position)
         row_position =  position[0,1].to_sym
