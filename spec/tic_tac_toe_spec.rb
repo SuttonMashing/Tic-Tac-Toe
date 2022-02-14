@@ -47,6 +47,14 @@ describe "Board" do
         expect(game.move("C3", board, 0)).to eq([[["","",""],["","",""],["","","X"]], 1])
     end
 
+    it "prints the current board" do
+        board = [[" ","X"," "],["O"," "," "],[" "," ","O"]]
+        game = Game.new
+        expect(game.print_board(board)).to eq([[" ","X"," "],["O"," "," "],[" "," ","O"]])
+    end
+
+
+
 end
 
 describe "row finder" do

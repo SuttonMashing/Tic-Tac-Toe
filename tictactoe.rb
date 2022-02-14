@@ -1,6 +1,8 @@
+require "rules"
+
 class Game
 
-    board = [["","",""],["","",""],["","",""]]
+    board = [[" "," "," "],[" "," "," "],[" "," "," "]]
     counter = 0
 
     def move(position, board, counter)
@@ -11,7 +13,7 @@ class Game
         row = row_finder(position) #use row finder to give row on board
         col = col_finder(position) #use col finder to give col on board
 
-        if board[row][col] == "" && counter.even?
+        if board[row][col] == "" && counter.even?  
           board[row][col] = "X"  
           counter += 1
           return board, counter
@@ -41,6 +43,15 @@ class Game
         col_position =  (position[1,1].to_i) - 1
     
     end 
+
+    def print_board(board)
+        puts "\n"
+        board.each do |r|
+            puts r.each { |p| p }.join("|")
+            puts "-----"
+        end
+    
+    end   
     
 
 end
