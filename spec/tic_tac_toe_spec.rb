@@ -1,19 +1,38 @@
 require "./tictactoe"
 
+
+
 describe "Board" do 
     it "initialises empty 3x3 board" do
+        board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.board("")).to eq([["","",""],["","",""],["","",""]]) 
+        expect(game.move("", board)).to eq([["","",""],["","",""],["","",""]]) 
     end
 
     it "places Cross in centre of board" do
+        board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.board("B2")).to eq([["","",""],["", "X", ""],["","",""]]) 
+        expect(game.move("B2", board)).to eq([["","",""],["", "X", ""],["","",""]]) 
     end
 
     it "places Cross in bottom left" do
+        board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.board("C1")).to eq([["","",""],["", "", ""],["X","",""]]) 
+        expect(game.move("C1", board)).to eq([["","",""],["", "", ""],["X","",""]]) 
+    end
+
+    it "if there is already a cross in B1, print invalid move" do
+        board = [["","",""],["X","",""],["","",""]]
+        game = Game.new
+        expect(game.move("B1", board)).to eq("Invalid Move!") 
+    end
+
+    it "takes A1, B2, C3" do
+        board = [["","",""],["","",""],["","",""]]
+        game = Game.new
+        expect(game.move("A1", board)).to eq([["X","",""],["","",""],["","",""]]) 
+        expect(game.move("B2", board)).to eq([["X","",""],["","X",""],["","",""]]) 
+        expect(game.move("C3", board)).to eq([["X","",""],["","X",""],["","","X"]]) 
     end
 
 end

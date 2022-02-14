@@ -1,29 +1,26 @@
 class Game
 
-    def board(position)
-        board = [["","",""],["","",""],["","",""]]
+    board = [["","",""],["","",""],["","",""]]
+
+
+    def move(position, board)
         if position == ""
             return board
     
         end   
-        row = row_finder(position)
-        col = col_finder(position)
+        row = row_finder(position) #use row finder to give row on board
+        col = col_finder(position) #use col finder to give col on board
 
-        board[row][col] = "X"
-        return board 
-
+        if board[row][col] == ""
+          board[row][col] = "X"  
+          return board 
+        else 
+            return "Invalid Move!"
+        end    
+        
 
         # A, B, C are rows represented by each subarray 
         # 1, 2, 3 are columns represented by each position in the subarray
-
-    # case position   
-    # when "B2"
-    #     return [["","",""],["","X",""],["","",""]]
-    # when "C1"
-    #     return [["","",""],["", "", ""],["X","",""]]   
-    # else 
-    #     return [["","",""],["","",""],["","",""]]
-    # end
 
     end
     
