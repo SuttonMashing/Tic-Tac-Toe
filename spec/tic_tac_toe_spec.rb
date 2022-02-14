@@ -6,33 +6,45 @@ describe "Board" do
     it "initialises empty 3x3 board" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.move("", board)).to eq([["","",""],["","",""],["","",""]]) 
+        expect(game.move("", board, 0)).to eq([["","",""],["","",""],["","",""]]) 
     end
 
     it "places Cross in centre of board" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.move("B2", board)).to eq([["","",""],["", "X", ""],["","",""]]) 
+        expect(game.move("B2", board, 0)).to eq([["","",""],["", "X", ""],["","",""]]) 
     end
 
     it "places Cross in bottom left" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.move("C1", board)).to eq([["","",""],["", "", ""],["X","",""]]) 
+        expect(game.move("C1", board, 0)).to eq([["","",""],["", "", ""],["X","",""]]) 
     end
 
     it "if there is already a cross in B1, print invalid move" do
         board = [["","",""],["X","",""],["","",""]]
         game = Game.new
-        expect(game.move("B1", board)).to eq("Invalid Move!") 
+        expect(game.move("B1", board, 0)).to eq("Invalid Move!") 
     end
 
     it "takes A1, B2, C3" do
         board = [["","",""],["","",""],["","",""]]
         game = Game.new
-        expect(game.move("A1", board)).to eq([["X","",""],["","",""],["","",""]]) 
-        expect(game.move("B2", board)).to eq([["X","",""],["","X",""],["","",""]]) 
-        expect(game.move("C3", board)).to eq([["X","",""],["","X",""],["","","X"]]) 
+        expect(game.move("A1", board, 0)).to eq([[["X","",""],["","",""],["","",""]], 1]) 
+        expect(game.move("B2", board, 1)).to eq([[["X","",""],["","X",""],["","",""]], 2])  
+        expect(game.move("C3", board, 2)).to eq([[["X","",""],["","X",""],["","","X"]], 3]) 
+    end
+
+    it "If turn = 1, return player 'O'" do
+        board = [["","",""],["","",""],["","",""]]
+        game = Game.new
+        expect(game.turn(1)).to eq("O") 
+    end
+
+    it "Increases counter by 1 for each move" do
+        board = [["","",""],["","",""],["","",""]]
+        game = Game.new
+        expect(game.move("C3", board, 0)).to eq([[["","",""],["","",""],["","","X"]], 1])
     end
 
 end

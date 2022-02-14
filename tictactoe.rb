@@ -1,9 +1,14 @@
 class Game
 
     board = [["","",""],["","",""],["","",""]]
+    counter = 0
+
+    def counter(counter)
+        return counter
+    end
 
 
-    def move(position, board)
+    def move(position, board, counter)
         if position == ""
             return board
     
@@ -13,7 +18,9 @@ class Game
 
         if board[row][col] == ""
           board[row][col] = "X"  
-          return board 
+          counter += 1
+          return board, counter
+          
         else 
             return "Invalid Move!"
         end    
@@ -22,6 +29,15 @@ class Game
         # A, B, C are rows represented by each subarray 
         # 1, 2, 3 are columns represented by each position in the subarray
 
+    end
+    
+    def turn(counter)
+        #player X starts
+        if counter.even?
+            return "X"
+        else 
+            return "O"
+        end
     end
     
     def row_finder(position)
