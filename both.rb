@@ -1,4 +1,4 @@
-require "./rules"
+
 
 class Game
     attr_accessor :counter
@@ -56,7 +56,14 @@ class Game
             puts "-----"
         end
     
-    end   
+    end 
+    
+    def input
+        
+        if @counter.even? 
+            print "Player X it is your turn"
+        end
+    end
     
 
 end
@@ -65,5 +72,10 @@ end
 
 
 
+# def main 
 
+#     do input to user
+#         < input
+#     do move(input, baord, counter)
 
+#     end 

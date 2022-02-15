@@ -2,6 +2,7 @@ require "./tictactoe"
 
 class Rules
     attr_accessor :input
+    attr_accessor :counter
 
     def input
         
