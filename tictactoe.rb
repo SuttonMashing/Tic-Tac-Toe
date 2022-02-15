@@ -1,9 +1,11 @@
-require "rules"
+require "./rules"
 
 class Game
-
+    attr_accessor :counter
+    
+    @counter = 0
     board = [[" "," "," "],[" "," "," "],[" "," "," "]]
-    counter = 0
+    
 
     def move(position, board, counter)
         if position == ""

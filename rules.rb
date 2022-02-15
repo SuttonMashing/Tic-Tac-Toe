@@ -1,9 +1,13 @@
+require "./tictactoe"
+
 class Rules
     attr_accessor :input
 
     def input
-        puts "Player X it is your turn"
-        return "Player X it is your turn"
+        
+        if Game.counter.even? 
+            print "Player X it is your turn"
+        end
     end
 end
 
