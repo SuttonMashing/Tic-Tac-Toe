@@ -2,30 +2,42 @@
 
 class Game
     attr_accessor :counter
+
     
     def initialize 
-        @counter = 0
+     @counter = 0
+     @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
     end
 
-    board = [[" "," "," "],[" "," "," "],[" "," "," "]]
+   
     
+    def main
 
-    def move(position, board, counter)
+    position = input
+
+    current_board = move(position, counter)
+
+    print_board(@board)
+
+    end
+
+
+    def move(position, counter)
         if position == ""
-            return board
+            return @board
     
         end   
         row = row_finder(position) #use row finder to give row on board
         col = col_finder(position) #use col finder to give col on board
 
-        if board[row][col] == "" && counter.even?  
-          board[row][col] = "X"  
+        if @board[row][col] == " " && counter.even?  
+          @board[row][col] = "X"  
           counter += 1
-          return board, counter
-        elsif board[row][col] == "" && counter.odd?
-            board[row][col] = "O"  
+          return @board, counter
+        elsif @board[row][col] == " " && counter.odd?
+            @board[row][col] = "O"  
             counter += 1
-            return board, counter
+            return @board, counter
           
         else 
             return "Invalid Move!"
@@ -51,7 +63,7 @@ class Game
 
     def print_board(board)
         puts "\n"
-        board.each do |r|
+        @board.each do |r|
             puts r.each { |p| p }.join("|")
             puts "-----"
         end
@@ -61,7 +73,7 @@ class Game
     def input
         if @counter.even? 
             # print "Player X it is your turn"
-            print "Please enter your move"
+            print "Please enter your move: "
             move = gets.chomp
         end
     end
@@ -69,14 +81,8 @@ class Game
 
 end
 
+game = Game.new
+game.main 
 
 
 
-
-# def main 
-
-#     do input to user
-#         < input
-#     do move(input, baord, counter)
-
-#     end 
