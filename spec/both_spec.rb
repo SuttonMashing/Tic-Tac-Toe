@@ -3,15 +3,27 @@ require "./both"
 describe "Input" do
     it "Presents user with input prompt" do
         game = Game.new
-        expect{game.input}.to output("Player X it is your turn").to_stdout
+        allow(game).to receive(:gets).and_return("C1\n")
+        expect{game.input}.to output("Please enter your move").to_stdout
     end
 
     it "Presents correct player with input prompt" do
         game = Game.new
+        allow(game).to receive(:gets).and_return("C1\n")
         board = [["","",""],["","",""],["","",""]]
         expect(game.move("C3", board, 1)).to eq([[["","",""],["","",""],["","","O"]], 2]) 
-        expect{game.input}.to output("Player X it is your turn").to_stdout
+        expect{game.input}.to output("Please enter your move").to_stdout
     end
+
+    it "Takes in input and makes moves" do
+        game = Game.new 
+        allow(game).to receive(:gets).and_return("C1\n")
+        board = [["","",""],["","",""],["","",""]]
+        expect{game.input}.to output("Please enter your move").to_stdout
+        expect(game.input).to eq("C1")
+    end
+
+   
 
 end
 
@@ -60,11 +72,11 @@ describe "Board" do
         expect(game.move("C3", board, 0)).to eq([[["","",""],["","",""],["","","X"]], 1])
     end
 
-    it "prints the current board" do
-        board = [[" ","X"," "],["O"," "," "],[" "," ","O"]]
-        game = Game.new
-        expect(game.print_board(board)).to eq([[" ","X"," "],["O"," "," "],[" "," ","O"]])
-    end
+    # it "prints the current board" do
+    #     board = [[" ","X"," "],["O"," "," "],[" "," ","O"]]
+    #     game = Game.new
+    #     expect(game.print_board(board)).to eq([[" ","X"," "],["O"," "," "],[" "," ","O"]])
+    # end
 
 
 

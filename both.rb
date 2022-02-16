@@ -59,9 +59,10 @@ class Game
     end 
     
     def input
-        
         if @counter.even? 
-            print "Player X it is your turn"
+            # print "Player X it is your turn"
+            print "Please enter your move"
+            move = gets.chomp
         end
     end
     
