@@ -5,21 +5,26 @@ class Game
      @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
     end
 
+    def counter
+        @counter
+    end
+
    
     
     def main
-        if @counter < 9
+        
+        while @counter < 9
             position = input
 
             current_board = move(position, @counter)
 
             print_board(@board)  
+
     
-        elsif @counter >= 9
-            print  "Game over" 
             
         end
-
+        print  "Game over" 
+            
         
     end
 
@@ -40,9 +45,8 @@ class Game
             @board[row][col] = "O"  
             @counter += 1
             return @board, @counter
-          
-        else 
-            return "Invalid Move!"
+        elsif @board[row][col] == "X" or @board[row][col] == "O"
+            puts "Invalid Move!"
         end    
         
 
@@ -53,7 +57,7 @@ class Game
     
     
     def row_finder(position)
-        row_position =  position[0,1].to_sym
+        row_position =  position[0,1].capitalize.to_sym
         row = {:A => 0, :B => 1, :C => 2}
         row[row_position]
     end 
@@ -74,8 +78,12 @@ class Game
     
     def input
         if @counter.even? 
-            # print "Player X it is your turn"
-            print "Please enter your move: "
+            puts "Player X it is your turn" 
+            puts "Please enter your move: "
+            move = gets.chomp
+        else
+            puts "Player O it is your turn"
+            puts "Please enter your move: "
             move = gets.chomp
         end
     end
@@ -83,8 +91,8 @@ class Game
 
 end
 
-game = Game.new
-game.main 
-
+# game = Game.new
+# game.main 
+#if this is uncommented you MUST play the game to get to the tests!!
 
 

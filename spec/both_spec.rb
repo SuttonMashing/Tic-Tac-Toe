@@ -8,10 +8,9 @@ describe "Input" do
     end
 
     it "Presents correct player with input prompt" do
-        game = Game.new
+        game = Game.new(1)
         allow(game).to receive(:gets).and_return("C1\n")
-        expect(game.move("C1", 0)).to eq([[[" "," "," "],[" "," "," "],["X"," "," "]], 1])
-        expect(game.move("C3", 1)).to eq([[[" "," "," "],[" "," "," "],["X"," ","O"]], 2]) 
+        expect(game.move("C3", 1)).to eq([[[" "," "," "],[" "," "," "],[" "," ","O"]], 2]) 
         expect{game.input}.to output("Please enter your move: ").to_stdout
     end
 
@@ -56,7 +55,7 @@ describe "Board" do
     it "if there is already a cross in B1, print invalid move" do
         game = Game.new
         expect(game.move("B1", 0)).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
-        expect(game.move("B1", 0)).to eq("Invalid Move!") 
+        expect{game.move("B1", 0)}.to output("Invalid Move!\n").to_stdout
     end
 
     it "takes A1, B2, C3" do
@@ -84,14 +83,20 @@ describe "Board" do
         expect{game.main}.to output("Game over").to_stdout
     end
 
-    it "While counter < 9 the main function takes an input move and prints a board" do
-        game = Game.new(4)
-        allow(game).to receive(:gets).and_return("C1\n")
-        expect{game.main}.to start_with("Please enter your move: ").to_stdout
-        expect{game.main}.to output([[" "," "," "],[" "," "," "],["X"," "," "]]).to_stdout
+    # it "While counter < 9 the main function takes an input move" do
+    #     game = Game.new(4)
+    #     expected_output = a_string_starting_with("Please enter your move: ")
+    #     allow(game).to receive(:gets).and_return("C1\n")
+    #     expect{game.main}.to output(expected_output).to_stdout
+    # end
+
+    it "Test counter increases" do
+        game = Game.new(8)
+        game.move("C1", 2)
+        expect(game.counter).to eq(9)
     end
 
-    # expect("this string").to start_with("this")
+    
     
 end
 
