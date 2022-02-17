@@ -8,13 +8,19 @@ class Game
    
     
     def main
+        if @counter < 9
+            position = input
 
-    position = input
+            current_board = move(position, @counter)
 
-    current_board = move(position, @counter)
+            print_board(@board)  
+    
+        elsif @counter >= 9
+            print  "Game over" 
+            
+        end
 
-    print_board(@board)
-
+        
     end
 
 

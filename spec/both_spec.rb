@@ -80,29 +80,37 @@ describe "Board" do
 
     it "When counter reaches 9 the message 'Game over' is printed" do
         game = Game.new(9)
+        allow(game).to receive(:gets).and_return("C1\n")
         expect{game.main}.to output("Game over").to_stdout
     end
 
-    # it "prints the current board" do
-    #     board = [[" ","X"," "],["O"," "," "],[" "," ","O"]]
-    #     game = Game.new
-    #     expect(game.print_board(board)).to eq([[" ","X"," "],["O"," "," "],[" "," ","O"]])
-    # end
+    it "While counter < 9 the main function takes an input move and prints a board" do
+        game = Game.new(4)
+        allow(game).to receive(:gets).and_return("C1\n")
+        expect{game.main}.to start_with("Please enter your move: ").to_stdout
+        expect{game.main}.to output([[" "," "," "],[" "," "," "],["X"," "," "]]).to_stdout
+    end
 
-
-
+    # expect("this string").to start_with("this")
+    
 end
 
 describe "row finder" do
     it "gets row given index" do
         game = Game.new
-        expect(game.row_finder("C1")).to eq(2) 
+        expect(game.row_finder("C1")).to eq(2) #row is the letter
     end
 end
 
 describe "column finder" do
     it "gets column given index" do
         game = Game.new
-        expect(game.col_finder("C1")).to eq(0) 
+        expect(game.col_finder("B1")).to eq(0) #column is the number
     end
 end
+
+# it "prints the current board" do
+    #     board = [[" ","X"," "],["O"," "," "],[" "," ","O"]]
+    #     game = Game.new
+    #     expect(game.print_board(board)).to eq([[" ","X"," "],["O"," "," "],[" "," ","O"]])
+    # end
