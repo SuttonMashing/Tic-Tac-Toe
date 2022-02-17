@@ -1,11 +1,7 @@
-
-
 class Game
-    attr_accessor :counter
-
     
-    def initialize 
-     @counter = 0
+    def initialize(counter = 0) #game.initialize(1)
+     @counter = counter
      @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
     end
 
@@ -15,7 +11,7 @@ class Game
 
     position = input
 
-    current_board = move(position, counter)
+    current_board = move(position, @counter)
 
     print_board(@board)
 
@@ -30,14 +26,14 @@ class Game
         row = row_finder(position) #use row finder to give row on board
         col = col_finder(position) #use col finder to give col on board
 
-        if @board[row][col] == " " && counter.even?  
+        if @board[row][col] == " " && @counter.even?  
           @board[row][col] = "X"  
-          counter += 1
-          return @board, counter
-        elsif @board[row][col] == " " && counter.odd?
+          @counter += 1
+          return @board, @counter
+        elsif @board[row][col] == " " && @counter.odd?
             @board[row][col] = "O"  
-            counter += 1
-            return @board, counter
+            @counter += 1
+            return @board, @counter
           
         else 
             return "Invalid Move!"

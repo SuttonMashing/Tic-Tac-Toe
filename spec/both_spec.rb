@@ -10,8 +10,8 @@ describe "Input" do
     it "Presents correct player with input prompt" do
         game = Game.new
         allow(game).to receive(:gets).and_return("C1\n")
-        board = [[" "," "," "],[" "," "," "],[" "," "," "]]
-        expect(game.move("C3", 1)).to eq([[[" "," "," "],[" "," "," "],[" "," ","O"]], 2]) 
+        expect(game.move("C1", 0)).to eq([[[" "," "," "],[" "," "," "],["X"," "," "]], 1])
+        expect(game.move("C3", 1)).to eq([[[" "," "," "],[" "," "," "],["X"," ","O"]], 2]) 
         expect{game.input}.to output("Please enter your move: ").to_stdout
     end
 
@@ -68,8 +68,7 @@ describe "Board" do
     end
 
     it "If counter = 1, place player 'O'" do
-        board = [[" "," "," "],[" "," "," "],[" "," "," "]]
-        game = Game.new
+        game = Game.new(1)
         expect(game.move("A1", 1)).to eq([[["O"," "," "],[" "," "," "],[" "," "," "]], 2]) 
     end
 
@@ -77,6 +76,11 @@ describe "Board" do
         board = [[" "," "," "],[" "," "," "],[" "," "," "]]
         game = Game.new
         expect(game.move("C3", 0)).to eq([[[" "," "," "],[" "," "," "],[" "," ","X"]], 1])
+    end
+
+    it "When counter reaches 9 the message 'Game over' is printed" do
+        game = Game.new(9)
+        expect{game.main}.to output("Game over").to_stdout
     end
 
     # it "prints the current board" do
