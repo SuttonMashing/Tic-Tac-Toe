@@ -1,32 +1,26 @@
+#contains functions for making a move, stores baord as object inside itself, breaks down input
 class Game
     
-    def initialize(counter = 0) #game.initialize(1)
+    def initialize(rules, counter = 0) #game.initialize(1)
      @counter = counter
      @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
+     @rules = rules
     end
 
     def counter
         @counter
     end
 
+    def passes_counter_for_input
+        @rules.input(@counter)
+    end
+
+    def passes_remaining_moves_to_rules
+        @rules.game_over?(moves_remaining)
+    end
+
    
     
-    def main
-        
-        while @counter < 9
-            position = input
-
-            current_board = move(position, @counter)
-
-            print_board(@board)  
-
-    
-            
-        end
-        print  "Game over" 
-            
-        
-    end
 
 
     def move(position, counter)
@@ -54,6 +48,10 @@ class Game
         # 1, 2, 3 are columns represented by each position in the subarray
 
     end
+
+    def moves_remaining
+        remaining_moves = 9 - @counter
+    end
     
     
     def row_finder(position)
@@ -67,7 +65,7 @@ class Game
     
     end 
 
-    def print_board(board)
+    def print_board()
         puts "\n"
         @board.each do |r|
             puts r.each { |p| p }.join("|")
@@ -75,18 +73,6 @@ class Game
         end
     
     end 
-    
-    def input
-        if @counter.even? 
-            puts "Player X it is your turn" 
-            puts "Please enter your move: "
-            move = gets.chomp
-        else
-            puts "Player O it is your turn"
-            puts "Please enter your move: "
-            move = gets.chomp
-        end
-    end
     
 
 end
