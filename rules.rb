@@ -2,6 +2,7 @@
 #to do: make function checking for winning pattern
 class Rules
 
+    
     def input(counter)
         if counter.even? 
             puts "Player X it is your turn" 
@@ -21,5 +22,14 @@ class Rules
             return false
         end
     end
-    
+
+    def win_check(board)
+        if board[0][0] == board[1][1] && board[0][0] == board[2][2]
+            return true
+        elsif board[0][2] == board[1][1] && board[0][2] == board[2][0]
+            return true
+        else
+            return false
+        end
+    end
 end

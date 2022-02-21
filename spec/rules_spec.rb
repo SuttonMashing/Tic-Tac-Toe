@@ -24,8 +24,13 @@ describe "Input" do
         expect{game.passes_counter_for_input}.to output("Player X it is your turn\nPlease enter your move: \n").to_stdout
         expect(game.passes_counter_for_input).to eq("C1")
     end
-
     
-    
+end
 
+describe "Win Check" do
+    it "Takes in board and check that is has a winning diagonal" do
+        rules = Rules.new
+        board = [["X","O"," "],["O", "X", " "],[" ", " ", "X"]]
+        expect(rules.win_check(board)).to eq(true)
+    end
 end
