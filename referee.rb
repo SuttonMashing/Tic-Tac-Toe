@@ -28,6 +28,10 @@ class Referee
         @rules.game_over?(moves_remaining)
     end
 
+    def do_move
+        @board.move(position, @counter)
+    end
+
     def moves_remaining
         remaining_moves = 9 - @counter
     end
