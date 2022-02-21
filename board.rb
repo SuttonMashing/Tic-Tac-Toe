@@ -1,4 +1,4 @@
-require_relative "main"
+require_relative "referee"
 
 #contains functions for making a move, stores baord as object inside itself, breaks down input
 class Board
