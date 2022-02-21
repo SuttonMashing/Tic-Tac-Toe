@@ -2,7 +2,6 @@ require "./game"
 require "./rules"
 
 
-
 describe "Board" do 
     it "initialises empty 3x3 board" do
         rules = Rules.new

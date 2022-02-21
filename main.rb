@@ -1,12 +1,17 @@
+
+
 #run game, call function for winner from rules class and check for draws 
 class Main
 
-    def main
-        
-        while @counter < 9
-            position = input()
+    def initialize(rules)
+        @rules = rules
 
-            current_board = move(position, @counter)
+    def main(counter)
+        
+        while counter < 9
+            position = input(counter)
+
+            current_board = move(position, counter)
 
             print_board(@board)  
 
@@ -17,4 +22,9 @@ class Main
             
         
     end
+
+    def passes_counter_for_input
+        @rules.input(@counter)
+    end
 end
+

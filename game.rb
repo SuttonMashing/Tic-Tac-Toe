@@ -1,10 +1,18 @@
+require_relative "rules"
+require_relative "main"
+
 #contains functions for making a move, stores baord as object inside itself, breaks down input
 class Game
     
-    def initialize(rules, counter = 0) #game.initialize(1)
-     @counter = counter
-     @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
-     @rules = rules
+    def initialize(main, rules, counter = 0) #game.initialize(1)
+        @counter = counter
+        @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
+        @rules = rules
+        @main = main
+    end
+
+    def play_game()
+        @main.main(@counter)
     end
 
     def counter
@@ -77,8 +85,10 @@ class Game
 
 end
 
-# game = Game.new
-# game.main 
+current_game = Main.new
+rules = Rules.new()
+game = Game.new(current_game, rules, 0)
+game.play_game
 #if this is uncommented you MUST play the game to get to the tests!!
 
 
