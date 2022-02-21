@@ -35,9 +35,13 @@ class Referee
     end
 
     def do_move(position)
-        @board.move(position, @counter)
-        @counter += 1
-        return @board.board_getter, @counter
+        if @board.valid_move?(position) == false
+            puts "Invalid Move!"
+        else
+            @board.move(position, @counter)
+            @counter += 1
+            return @board.board_getter, @counter
+        end
     end
 
     def moves_remaining

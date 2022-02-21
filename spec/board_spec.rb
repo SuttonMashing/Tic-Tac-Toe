@@ -23,14 +23,6 @@ describe "Board" do
         expect(ref.do_move("C1")).to eq([[[" "," "," "],[" ", " ", " "],["X"," "," "]], 1]) 
     end
 
-    # it "if there is already a cross in B1, print invalid move" do
-    #     rules = Rules.new
-    #     game = Board.new
-    #     ref = Referee.new(rules, game)
-    #     expect(ref.do_move("B1")).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
-    #     expect{ref.do_move("B1")}.to output("Invalid Move!\n").to_stdout
-    # end
-
     it "takes A1, B2, C3" do
         # Arrange
         rules = Rules.new
@@ -130,6 +122,24 @@ describe "Valid move checker" do
         game.move("C1", 0)
         expect(game.valid_move?("C1")).to eq(false)
     end
+
+    it "if there is already a cross in B1, print invalid move" do
+        rules = Rules.new
+        game = Board.new
+        ref = Referee.new(rules, game)
+        game.move("C1", 0)
+        expect{ref.do_move("C1")}.to output("Invalid Move!\n").to_stdout
+    end
+
+    it "Checks that counter doesn't increase when given an invalid move" do
+        rules = Rules.new
+        game = Board.new
+        ref = Referee.new(rules, game, 4)
+        game.move("C1", 0)
+        ref.do_move("C1")
+        expect(ref.counter_getter).to eq(4)
+    end
+
 end
 
 

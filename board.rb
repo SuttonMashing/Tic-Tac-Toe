@@ -11,7 +11,14 @@ class Board
         @board
     end
 
-   
+   def valid_move?(position)
+        row = row_finder(position) #use row finder to give row on board
+        col = col_finder(position) #use col finder to give col on board
+        if @board[row][col] == "X" or @board[row][col] == "O"
+                # puts "Invalid Move!"
+                return false
+        end
+   end
 
     def move(position, counter)
         if position == ""
@@ -27,8 +34,6 @@ class Board
         elsif @board[row][col] == " " && counter.odd?
             @board[row][col] = "O"  
             return @board, counter
-        # elsif @board[row][col] == "X" or @board[row][col] == "O"
-        #     puts "Invalid Move!"
         end    
         
         # A, B, C are rows represented by each subarray 
