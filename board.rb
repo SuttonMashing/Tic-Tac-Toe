@@ -23,11 +23,9 @@ class Board
 
         if @board[row][col] == " " && counter.even?  
           @board[row][col] = "X"  
-          counter += 1
           return @board, counter
         elsif @board[row][col] == " " && counter.odd?
             @board[row][col] = "O"  
-            counter += 1
             return @board, counter
         elsif @board[row][col] == "X" or @board[row][col] == "O"
             puts "Invalid Move!"

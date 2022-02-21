@@ -12,44 +12,50 @@ describe "Board" do
     it "places Cross in centre of board" do
         rules = Rules.new
         game = Board.new
-        expect(game.move("B2", 0)).to eq([[[" "," "," "],[" ", "X", " "],[" "," "," "]], 1]) 
+        ref = Referee.new(rules, game)
+        expect(ref.do_move("B2")).to eq([[[" "," "," "],[" ", "X", " "],[" "," "," "]], 1]) 
     end
 
     it "places Cross in bottom left" do
         rules = Rules.new
         game = Board.new
-        expect(game.move("C1", 0)).to eq([[[" "," "," "],[" ", " ", " "],["X"," "," "]], 1]) 
+        ref = Referee.new(rules, game)
+        expect(ref.do_move("C1")).to eq([[[" "," "," "],[" ", " ", " "],["X"," "," "]], 1]) 
     end
 
     it "if there is already a cross in B1, print invalid move" do
         rules = Rules.new
         game = Board.new
-        expect(game.move("B1", 0)).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
-        expect{game.move("B1", 0)}.to output("Invalid Move!\n").to_stdout
+        ref = Referee.new(rules, game)
+        expect(ref.do_move("B1")).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
+        expect{ref.do_move("B1")}.to output("Invalid Move!\n").to_stdout
     end
 
     it "takes A1, B2, C3" do
         # Arrange
         rules = Rules.new
         game = Board.new
-        game.move("A1", 0)
-        game.move("B2", 1)
+        ref = Referee.new(rules, game)
+        ref.do_move("A1")
+        ref.do_move("B2")
 
         # Act and assert
-        expect(game.move("C3", 2)).to eq([[["X"," "," "],[" ","O"," "],[" "," ","X"]], 3]) 
+        expect(ref.do_move("C3")).to eq([[["X"," "," "],[" ","O"," "],[" "," ","X"]], 3]) 
     end
 
-    it "If counter = 1, place player 'O'" do
+    it "If counter = 1, place player 'O' and increase counter by 1" do
         rules = Rules.new
         game = Board.new
-        expect(game.move("A1", 1)).to eq([[["O"," "," "],[" "," "," "],[" "," "," "]], 2]) 
+        ref = Referee.new(rules, game, 1)
+        expect(ref.do_move("A1")).to eq([[["O"," "," "],[" "," "," "],[" "," "," "]], 2]) 
     end
 
     it "Test counter increases" do
         rules = Rules.new
         game = Board.new
-        game.move("C1", 2)
-        expect(game.counter).to eq(9)
+        ref = Referee.new(rules, game, 8)
+        ref.do_move("C1")
+        expect(ref.counter_getter).to eq(9)
     end
 
    
@@ -59,31 +65,33 @@ describe "Board" do
         
         rules = Rules.new
         game = Board.new
+        ref = Referee.new(rules, game)
         # Act
         # (First call move 9 times)
-        game.move("A1", 0)
-        game.move("A2", 0)
-        game.move("A3", 0)
-        game.move("B1", 0)
-        game.move("B2", 0)
-        game.move("B3", 0)
-        game.move("C1", 0)
-        game.move("C2", 0)
-        game.move("C3", 0)
+        ref.do_move("A1")
+        ref.do_move("A2")
+        ref.do_move("A3")
+        ref.do_move("B1")
+        ref.do_move("B2")
+        ref.do_move("B3")
+        ref.do_move("C1")
+        ref.do_move("C2")
+        ref.do_move("C3")
         
         
-        result = game.moves_remaining()
+        result = ref.moves_remaining()
 
         
         # Assert 
-        expect(result). to eq(0)
+        expect(result).to eq(0)
     end
 
     it "When counter reaches 9 the message 'Game over' is printed" do
         rules = Rules.new
         game = Board.new
-        allow(rules).to receive(:gets).and_return("C1\n")
-        expect(game.passes_remaining_moves_to_rules).to eq(true)
+        ref = Referee.new(rules, game, 8)
+        ref.do_move("C1")
+        expect{ref.game_over_putter}.to output("Game Over!").to_stdout
     end
     
 end

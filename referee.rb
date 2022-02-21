@@ -11,6 +11,10 @@ class Referee
         @rules = rules
     end
 
+    def counter_getter
+        @counter
+    end
+
     
     def input
         if @counter.even? 
@@ -24,12 +28,16 @@ class Referee
         end
     end
 
-    def passes_remaining_moves_to_rules
-        @rules.game_over?(moves_remaining)
+    def game_over_putter
+        if @rules.game_over?(moves_remaining) == true
+            print "Game Over!"
+        end
     end
 
-    def do_move
+    def do_move(position)
         @board.move(position, @counter)
+        @counter += 1
+        return @board.board_getter, @counter
     end
 
     def moves_remaining
@@ -47,8 +55,7 @@ class Referee
 
         end
 
-        print  "Game over" 
-            
+        
         
     end
 
