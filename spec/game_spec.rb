@@ -46,18 +46,17 @@ describe "Board" do
         expect(game.move("A1", 1)).to eq([[["O"," "," "],[" "," "," "],[" "," "," "]], 2]) 
     end
 
-    it "Increases counter by 1 for each move" do
+    it "Test counter increases" do
         rules = Rules.new
-        game = Game.new(rules)
-        expect(game.move("C3", 0)).to eq([[[" "," "," "],[" "," "," "],[" "," ","X"]], 1])
+        game = Game.new(rules, 8)
+        game.move("C1", 2)
+        expect(game.counter).to eq(9)
     end
 
    
 
     it "will return zero moves when all moves are used up" do
         # Arrange
-        # rules = Rules.new
-        # game = Game.new(rules, 4)
         
         rules = Rules.new
         game = Game.new(rules)
@@ -86,23 +85,6 @@ describe "Board" do
         game = Game.new(rules, 9)
         allow(rules).to receive(:gets).and_return("C1\n")
         expect(game.passes_remaining_moves_to_rules).to eq(true)
-    end
-
-    # it "While counter < 9 the main function takes an input move" do
-    #     # Arrange
-    #     game = Game.new(4)
-    #     expected_output = a_string_starting_with("Please enter your move: ")
-    #     allow(game).to receive(:gets).and_return("C1\n")
-
-    #     # Assert
-    #     expect{game.main}.to output(expected_output).to_stdout
-    # end
-
-    it "Test counter increases" do
-        rules = Rules.new
-        game = Game.new(rules, 8)
-        game.move("C1", 2)
-        expect(game.counter).to eq(9)
     end
     
 end
@@ -133,6 +115,19 @@ describe "board printer" do
         expect(game.print_board()).to eq([[" ","X"," "],["O"," "," "],[" "," ","X"]])
     end
 end
+
+
+
+# it "While counter < 9 the main function takes an input move" do
+    #     # Arrange
+    #     game = Game.new(8)
+    #     expected_output = a_string_starting_with("Please enter your move: ")
+    #     allow(game).to receive(:gets).and_return("C1\n")
+
+    #     # Assert
+    #     expect{game.main}.to output(expected_output).to_stdout
+    # end
+
 
     # it "will return zero moves when all moves are used up" do
     #     # Arrange
