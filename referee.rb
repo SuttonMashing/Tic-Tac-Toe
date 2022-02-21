@@ -44,14 +44,19 @@ class Referee
         remaining_moves = 9 - @counter
     end
 
+    def board_printer
+        @board.print_board()  
+    end    
+
+
     def main
         
         while @counter < 9
             position = input
 
-            current_board = move(position, @counter)
+            current_board = do_move(position)
 
-            print_board(@board.board_getter)  
+            board_printer   
 
         end
 
@@ -64,3 +69,8 @@ class Referee
 
 end
 
+# board = Board.new
+# rules = Rules.new
+# ref = Referee.new(rules, board)
+
+# ref.main

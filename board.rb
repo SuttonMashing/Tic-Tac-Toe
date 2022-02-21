@@ -1,4 +1,4 @@
-require_relative "referee"
+
 
 #contains functions for making a move, stores baord as object inside itself, breaks down input
 class Board
@@ -27,8 +27,8 @@ class Board
         elsif @board[row][col] == " " && counter.odd?
             @board[row][col] = "O"  
             return @board, counter
-        elsif @board[row][col] == "X" or @board[row][col] == "O"
-            puts "Invalid Move!"
+        # elsif @board[row][col] == "X" or @board[row][col] == "O"
+        #     puts "Invalid Move!"
         end    
         
         # A, B, C are rows represented by each subarray 

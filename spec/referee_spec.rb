@@ -12,18 +12,19 @@ describe "Input" do
 
     it "Presents correct player with input prompt" do
         rules = Rules.new
-        game = Game.new(rules, 1)
-        allow(rules).to receive(:gets).and_return("C1\n")
-        expect(game.move("C3", 1)).to eq([[[" "," "," "],[" "," "," "],[" "," ","O"]], 2]) 
-        expect{game.passes_counter_for_input}.to output("Player X it is your turn\nPlease enter your move: \n").to_stdout
+        game = Board.new
+        ref = Referee.new(rules, game, 1)
+        allow(ref).to receive(:gets).and_return("C1\n")
+        expect{ref.input}.to output("Player O it is your turn\nPlease enter your move: \n").to_stdout
     end
 
-    it "Takes in input and makes moves" do
+    it "Takes in input and returns position" do
         rules = Rules.new
-        game = Game.new(rules)
-        allow(rules).to receive(:gets).and_return("C1\n")
-        expect{game.passes_counter_for_input}.to output("Player X it is your turn\nPlease enter your move: \n").to_stdout
-        expect(game.passes_counter_for_input).to eq("C1")
+        game = Board.new
+        ref = Referee.new(rules, game)
+        allow(ref).to receive(:gets).and_return("C1\n")
+        expect{ref.input}.to output("Player X it is your turn\nPlease enter your move: \n").to_stdout
+        expect(ref.input).to eq("C1")
     end
     
 end

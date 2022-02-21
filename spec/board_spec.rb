@@ -23,13 +23,13 @@ describe "Board" do
         expect(ref.do_move("C1")).to eq([[[" "," "," "],[" ", " ", " "],["X"," "," "]], 1]) 
     end
 
-    it "if there is already a cross in B1, print invalid move" do
-        rules = Rules.new
-        game = Board.new
-        ref = Referee.new(rules, game)
-        expect(ref.do_move("B1")).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
-        expect{ref.do_move("B1")}.to output("Invalid Move!\n").to_stdout
-    end
+    # it "if there is already a cross in B1, print invalid move" do
+    #     rules = Rules.new
+    #     game = Board.new
+    #     ref = Referee.new(rules, game)
+    #     expect(ref.do_move("B1")).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
+    #     expect{ref.do_move("B1")}.to output("Invalid Move!\n").to_stdout
+    # end
 
     it "takes A1, B2, C3" do
         # Arrange
@@ -120,6 +120,15 @@ describe "board printer" do
         game.move("B1", 1)
         game.move("C3", 2)
         expect(game.print_board()).to eq([[" ","X"," "],["O"," "," "],[" "," ","X"]])
+    end
+end
+
+describe "Valid move checker" do
+    it "returns false if move is invalid" do
+        rules = Rules.new
+        game = Board.new
+        game.move("C1", 0)
+        expect(game.valid_move?("C1")).to eq(false)
     end
 end
 
