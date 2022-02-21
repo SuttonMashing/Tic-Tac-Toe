@@ -1,29 +1,29 @@
-require "./game"
+require "./board"
 require "./rules"
 
 
 describe "Board" do 
     it "initialises empty 3x3 board" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         expect(game.move("", 0)).to eq([[" "," "," "],[" "," "," "],[" "," "," "]]) 
     end
 
     it "places Cross in centre of board" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         expect(game.move("B2", 0)).to eq([[[" "," "," "],[" ", "X", " "],[" "," "," "]], 1]) 
     end
 
     it "places Cross in bottom left" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         expect(game.move("C1", 0)).to eq([[[" "," "," "],[" ", " ", " "],["X"," "," "]], 1]) 
     end
 
     it "if there is already a cross in B1, print invalid move" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         expect(game.move("B1", 0)).to eq([[[" "," "," "],["X"," "," "],[" "," "," "]], 1]) 
         expect{game.move("B1", 0)}.to output("Invalid Move!\n").to_stdout
     end
@@ -31,7 +31,7 @@ describe "Board" do
     it "takes A1, B2, C3" do
         # Arrange
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         game.move("A1", 0)
         game.move("B2", 1)
 
@@ -41,13 +41,13 @@ describe "Board" do
 
     it "If counter = 1, place player 'O'" do
         rules = Rules.new
-        game = Game.new(rules, 1)
+        game = Board.new
         expect(game.move("A1", 1)).to eq([[["O"," "," "],[" "," "," "],[" "," "," "]], 2]) 
     end
 
     it "Test counter increases" do
         rules = Rules.new
-        game = Game.new(rules, 8)
+        game = Board.new
         game.move("C1", 2)
         expect(game.counter).to eq(9)
     end
@@ -58,7 +58,7 @@ describe "Board" do
         # Arrange
         
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         # Act
         # (First call move 9 times)
         game.move("A1", 0)
@@ -81,7 +81,7 @@ describe "Board" do
 
     it "When counter reaches 9 the message 'Game over' is printed" do
         rules = Rules.new
-        game = Game.new(rules, 9)
+        game = Board.new
         allow(rules).to receive(:gets).and_return("C1\n")
         expect(game.passes_remaining_moves_to_rules).to eq(true)
     end
@@ -91,7 +91,7 @@ end
 describe "row finder" do
     it "gets row given index" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         expect(game.row_finder("C1")).to eq(2) #row is the letter
     end
 end
@@ -99,7 +99,7 @@ end
 describe "column finder" do
     it "gets column given index" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         expect(game.col_finder("B1")).to eq(0) #column is the number
     end
 end
@@ -107,7 +107,7 @@ end
 describe "board printer" do
     it "prints the current board" do
         rules = Rules.new
-        game = Game.new(rules)
+        game = Board.new
         game.move("A2", 0)
         game.move("B1", 1)
         game.move("C3", 2)

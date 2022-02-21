@@ -1,5 +1,5 @@
 require "./rules"
-require "./game"
+require "./board"
 
 describe "Input" do
     it "Presents user with input prompt" do
