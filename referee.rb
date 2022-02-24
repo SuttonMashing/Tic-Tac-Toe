@@ -58,7 +58,7 @@ class Referee
 
     def which_winner()
         player = ""
-       if (@counter-1).even?
+       if @counter.odd?
          player = "Player X"
        else 
         player = "Player O"
@@ -94,8 +94,8 @@ class Referee
 
 end
 
-board = Board.new
-rules = Rules.new
-ref = Referee.new(rules, board)
+# board = Board.new
+# rules = Rules.new
+# ref = Referee.new(rules, board)
 
-ref.main
+# ref.main

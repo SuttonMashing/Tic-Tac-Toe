@@ -109,7 +109,7 @@ describe "board printer" do
         rules = Rules.new
         game = Board.new
         game.move("A2", 0)
-        game.move("B1", 1)
+        game.move("B1", 1) 
         game.move("C3", 2)
         expect(game.print_board()).to eq([[" ","X"," "],["O"," "," "],[" "," ","X"]])
     end
@@ -118,26 +118,30 @@ end
 describe "Valid move checker" do
     it "returns false if move is invalid" do
         rules = Rules.new
-        game = Board.new
-        game.move("C1", 0)
+        game = Board.new([[" "," "," "],[" "," "," "],["X"," "," "]])
         expect(game.valid_move?("C1")).to eq(false)
     end
 
     it "if there is already a cross in B1, print invalid move" do
         rules = Rules.new
-        game = Board.new
+        game = Board.new([[" "," "," "],[" "," "," "],["X"," "," "]])
         ref = Referee.new(rules, game)
-        game.move("C1", 0)
         expect{ref.do_move("C1")}.to output("Invalid Move!\n").to_stdout
     end
 
     it "Checks that counter doesn't increase when given an invalid move" do
         rules = Rules.new
-        game = Board.new
+        game = Board.new([[" "," "," "],[" "," "," "],["X"," "," "]])
         ref = Referee.new(rules, game, 4)
-        game.move("C1", 0)
         ref.do_move("C1")
         expect(ref.counter_getter).to eq(4)
+    end
+
+    it "Prints invalid move if row input outside of grid" do
+        rules = Rules.new
+        game = Board.new
+        ref = Referee.new(rules, game, 0)
+        expect(game.valid_move?("D3")).to eq(false)
     end
 
 end

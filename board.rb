@@ -11,9 +11,13 @@ class Board
         @board
     end
 
-   def valid_move?(position)
+   def valid_move?(position) 
+
         row = row_finder(position) #use row finder to give row on board
         col = col_finder(position) #use col finder to give col on board
+        if row == false 
+            return false
+        end    
         if @board[row][col] == "X" or @board[row][col] == "O"
                 # puts "Invalid Move!"
                 return false
@@ -47,6 +51,9 @@ class Board
     def row_finder(position)
         row_position =  position[0,1].capitalize.to_sym
         row = {:A => 0, :B => 1, :C => 2}
+         if row.key?(row_position) == false            
+            return false  
+        end  
         row[row_position]
     end 
     
