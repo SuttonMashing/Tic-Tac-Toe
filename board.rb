@@ -2,9 +2,9 @@
 
 #contains functions for making a move, stores baord as object inside itself, breaks down input
 class Board
-    
-    def initialize
-        @board = [[" "," "," "],[" "," "," "],[" "," "," "]]
+
+    def initialize(board = [[" "," "," "],[" "," "," "],[" "," "," "]])
+        @board = board
     end
 
     def board_getter

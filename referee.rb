@@ -52,6 +52,22 @@ class Referee
         @board.print_board()  
     end    
 
+    def check_winner
+        @rules.win_check(@board.board_getter)
+    end
+
+    def which_winner()
+        player = ""
+       if (@counter-1).even?
+         player = "Player X"
+       else 
+        player = "Player O"
+        end
+        return player
+    end
+
+
+
 
     def main
         
@@ -61,10 +77,15 @@ class Referee
             current_board = do_move(position)
 
             board_printer   
+            player = which_winner()
+
+            if check_winner == true
+                puts "Game Over! #{player} wins!"
+                exit 
+            end
 
         end
 
-        
         
     end
 
@@ -73,8 +94,8 @@ class Referee
 
 end
 
-# board = Board.new
-# rules = Rules.new
-# ref = Referee.new(rules, board)
+board = Board.new
+rules = Rules.new
+ref = Referee.new(rules, board)
 
-# ref.main
+ref.main

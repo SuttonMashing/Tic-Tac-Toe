@@ -28,3 +28,12 @@ describe "Input" do
     end
     
 end
+
+describe "Which Winner" do
+    it "Returns player X when given a player X winning board" do
+        rules = Rules.new
+        game = Board.new([["X"," ","O"],["X", "O", " "],["X", " ", " "]])
+        ref = Referee.new(rules, game, 1)
+        expect(ref.which_winner).to eq("Player X")
+    end
+end
