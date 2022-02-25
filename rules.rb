@@ -2,9 +2,6 @@
 #takes input and has a function checking for winner
 #to do: make function checking for winning pattern
 class Rules
-
-    def initialize
-    end
     
     
 
@@ -31,8 +28,6 @@ class Rules
         else
             return false
         end
-
-
 
     end
 end

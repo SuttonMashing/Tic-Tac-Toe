@@ -12,15 +12,17 @@ class Board
     end
 
    def valid_move?(position) 
-
+        character_length = position.length
         row = row_finder(position) #use row finder to give row on board
         col = col_finder(position) #use col finder to give col on board
-        if row == false 
+        if row == false || col == false || character_length > 2
             return false
-        end    
-        if @board[row][col] == "X" or @board[row][col] == "O"
+            
+        elsif @board[row][col] == "X" or @board[row][col] == "O"
                 # puts "Invalid Move!"
                 return false
+        else 
+            return true        
         end
    end
 
@@ -59,6 +61,11 @@ class Board
     
     def col_finder(position)
         col_position =  (position[1,1].to_i) - 1
+            if col_position.between?(0,2)
+                return col_position
+            else 
+                return false 
+            end    
     
     end 
 

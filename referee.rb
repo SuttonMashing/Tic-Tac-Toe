@@ -97,5 +97,5 @@ end
 # board = Board.new
 # rules = Rules.new
 # ref = Referee.new(rules, board)
-
+#if not commented out you MUST play to test 
 # ref.main

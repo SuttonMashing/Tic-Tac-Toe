@@ -144,6 +144,37 @@ describe "Valid move checker" do
         expect(game.valid_move?("D3")).to eq(false)
     end
 
+    it "Prints invalid move if column input outside of grid" do
+        game = Board.new
+        expect(game.valid_move?("B8")).to eq(false)
+    end
+
+    it "Returns true if both column and row inputs inside of grid" do
+        game = Board.new
+        expect(game.valid_move?("A1")).to eq(true)
+        expect(game.valid_move?("A2")).to eq(true)
+        expect(game.valid_move?("A3")).to eq(true)
+        expect(game.valid_move?("B1")).to eq(true)
+        expect(game.valid_move?("B2")).to eq(true)
+        expect(game.valid_move?("B3")).to eq(true)
+        expect(game.valid_move?("C1")).to eq(true)
+        expect(game.valid_move?("C2")).to eq(true)
+        expect(game.valid_move?("C3")).to eq(true)
+    end
+
+    it "Prints invalid move if both column and row input outside of grid" do
+        game = Board.new
+        expect(game.valid_move?("E5")).to eq(false)
+    end
+
+    it "Prints invalid move if gibberish is inputed by user" do
+        game = Board.new
+        expect(game.valid_move?("aaaaa")).to eq(false)
+        expect(game.valid_move?("12352")).to eq(false)
+        expect(game.valid_move?("a1quwgdiuqwgwd2")).to eq(false)
+        expect(game.valid_move?("ab")).to eq(false)
+    end
+
 end
 
 
