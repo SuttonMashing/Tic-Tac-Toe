@@ -4,7 +4,6 @@ require "./rules"
 
 describe "Board" do 
     it "initialises empty 3x3 board" do
-        rules = Rules.new
         game = Board.new
         expect(game.move("", 0)).to eq([[" "," "," "],[" "," "," "],[" "," "," "]]) 
     end
@@ -70,7 +69,6 @@ describe "Board" do
         ref.do_move("C2")
         ref.do_move("C3")
         
-        
         result = ref.moves_remaining()
 
         
@@ -83,7 +81,7 @@ describe "Board" do
         game = Board.new
         ref = Referee.new(rules, game, 8)
         ref.do_move("C1")
-        expect{ref.game_over_putter}.to output("Game Over!").to_stdout
+        expect{ref.game_over_putter}.to output("Game Over! It's a draw").to_stdout
     end
     
 end

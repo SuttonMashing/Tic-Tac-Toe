@@ -30,7 +30,7 @@ class Referee
 
     def game_over_putter
         if @rules.game_over?(moves_remaining) == true
-            print "Game Over!"
+            print "Game Over! It's a draw"
         end
     end
 
@@ -83,6 +83,8 @@ class Referee
                 puts "Game Over! #{player} wins!"
                 exit 
             end
+
+            game_over_putter
 
         end
 
