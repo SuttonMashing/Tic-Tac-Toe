@@ -1,14 +1,21 @@
 require_relative "rules"
 require_relative "board"
 
+class InputOutput
+    def send_output(output)
+        puts output
+    end
+end
+
 #Facilitate the game
 #run game, call function for winner from rules class and check for draws 
 class Referee
 
-    def initialize(rules, board, counter=0)
+    def initialize(rules, board, counter=0, input_output=nil)
         @board = board
         @counter = counter
         @rules = rules
+        @input_output = input_output
     end
 
     def counter_getter

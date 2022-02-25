@@ -37,22 +37,27 @@ describe "Which Winner" do
     end
 end
 
-# describe "Main" do 
-#     it "Plays full game and declares a draw" do
-#         game = Board.new
-#         rules = Rules.new 
-#         ref = Referee.new(rules, game)
-#         allow(ref.main).to receive(:input).and_return("C1\n") #X
-#         allow(ref).to receive(:input).and_return("A1\n") #O
-#         allow(ref).to receive(:input).and_return("B1\n") #X
-#         allow(ref).to receive(:input).and_return("B2\n") #O
-#         allow(ref).to receive(:input).and_return("C3\n") #X
-#         allow(ref).to receive(:input).and_return("C2\n") #O
-#         allow(ref).to receive(:input).and_return("A2\n") #X
-#         allow(ref).to receive(:input).and_return("B3\n") #O
-#         allow(ref).to receive(:input).and_return("A3\n") #X
-#         ref.board_printer()
-#         expect{ref.main}.to output("Game Over! It's a draw\n").to_stdout
+describe "Main" do 
+    it "Plays full game and declares a draw" do
+        game = Board.new
+        rules = Rules.new 
+        input_output = double("InputOutput")
+        ref = Referee.new(rules, game, input_output)
+        allow(input_output).to receive(:send_output)
+        allow(ref).to receive(:gets).and_return("C1", "A1", "B1", "B2", "C3", "C2", "A2", "B3", "A3")#X
+        # allow(ref).to receive(:input).and_return("A1\n") #O
+        # allow(ref).to receive(:input).and_return("B1\n") #X
+        # allow(ref).to receive(:input).and_return("B2\n") #O
+        # allow(ref).to receive(:input).and_return("C3\n") #X
+        # allow(ref).to receive(:input).and_return("C2\n") #O
+        # allow(ref).to receive(:input).and_return("A2\n") #X
+        # allow(ref).to receive(:input).and_return("B3\n") #O
+        # allow(ref).to receive(:input).and_return("A3\n") #X
+        puts "******************* about to print board"
+        ref.board_printer()
+        puts "******************* have printed board"
+        expect{ref.main}.to output("Game Over! It's a draw\n").to_stdout
+        puts "******************* test is done"
     
-#     end
-# end
+    end
+end
