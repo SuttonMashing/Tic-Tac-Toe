@@ -81,7 +81,7 @@ describe "Board" do
         game = Board.new
         ref = Referee.new(rules, game, 8)
         ref.do_move("C1")
-        expect{ref.game_over_putter}.to output("Game Over! It's a draw").to_stdout
+        expect(ref.game_over_putter).to eq("Game Over! It's a draw")
     end
     
 end
