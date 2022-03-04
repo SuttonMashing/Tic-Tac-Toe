@@ -36,10 +36,10 @@ class Board
 
         if @board[row][col] == " " && counter.even?  
           @board[row][col] = "X"  
-          return @board, counter
+          return @board
         elsif @board[row][col] == " " && counter.odd?
             @board[row][col] = "O"  
-            return @board, counter
+            return @board
         end    
         
         # A, B, C are rows represented by each subarray 

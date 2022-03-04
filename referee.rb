@@ -46,7 +46,7 @@ class Referee
         else
             @board.move(position, @counter)
             @counter += 1
-            return @board.board_getter, @counter
+            return @board.board_getter
         end
     end
 
@@ -72,6 +72,10 @@ class Referee
         return player
     end
 
+    def win_printer(player)
+        win_message = "Game Over! #{player} wins!"
+    end
+
 
 
 
@@ -86,11 +90,8 @@ class Referee
             player = which_winner()
 
             if check_winner == true
-                win_message = "Game Over! #{player} wins!"
-                @input_output.send_output(win_message)
-                # outputs "want to play again yes no?" #future QoL updates
-                # if input == no 
-                    exit 
+                @input_output.send_output(win_printer(player))
+                exit 
             end
 
             game_over_putter()

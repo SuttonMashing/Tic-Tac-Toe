@@ -46,18 +46,9 @@ describe "Main" do
         rules = Rules.new 
         inout = InputOutput.new
         ref = Referee.new(rules, game, 0, inout)
-        allow(inout).to receive(:gets).and_return("C1", "A1", "B1", "B2", "C3", "C2", "A2", "B3", "A3")#X
-        # allow(ref).to receive(:input).and_return("A1\n") #O
-        # allow(ref).to receive(:input).and_return("B1\n") #X
-        # allow(ref).to receive(:input).and_return("B2\n") #O
-        # allow(ref).to receive(:input).and_return("C3\n") #X
-        # allow(ref).to receive(:input).and_return("C2\n") #O
-        # allow(ref).to receive(:input).and_return("A2\n") #X
-        # allow(ref).to receive(:input).and_return("B3\n") #O
-        # allow(ref).to receive(:input).and_return("A3\n") #X
+        allow(inout).to receive(:gets).and_return("C1", "A1", "B1", "B2", "C3", "C2", "A2", "B3", "A3")
         ref.board_printer()
         ref.main
-        expect{ref.game_over_putter}.to output("Game Over! It's a draw\n").to_stdout
-        #expect{ref.main}.to output("Game Over! It's a draw\n").to_stdout    
+        expect{ref.game_over_putter}.to output("Game Over! It's a draw\n").to_stdout  
     end
 end

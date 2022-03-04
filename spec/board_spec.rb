@@ -12,14 +12,14 @@ describe "Board" do
         rules = Rules.new
         game = Board.new
         ref = Referee.new(rules, game)
-        expect(ref.do_move("B2")).to eq([[[" "," "," "],[" ", "X", " "],[" "," "," "]], 1]) 
+        expect(ref.do_move("B2")).to eq([[" "," "," "],[" ", "X", " "],[" "," "," "]]) 
     end
 
     it "places Cross in bottom left" do
         rules = Rules.new
         game = Board.new
         ref = Referee.new(rules, game)
-        expect(ref.do_move("C1")).to eq([[[" "," "," "],[" ", " ", " "],["X"," "," "]], 1]) 
+        expect(ref.do_move("C1")).to eq([[" "," "," "],[" ", " ", " "],["X"," "," "]]) 
     end
 
     it "takes A1, B2, C3" do
@@ -31,14 +31,14 @@ describe "Board" do
         ref.do_move("B2")
 
         # Act and assert
-        expect(ref.do_move("C3")).to eq([[["X"," "," "],[" ","O"," "],[" "," ","X"]], 3]) 
+        expect(ref.do_move("C3")).to eq([["X"," "," "],[" ","O"," "],[" "," ","X"]]) 
     end
 
     it "If counter = 1, place player 'O' and increase counter by 1" do
         rules = Rules.new
         game = Board.new
         ref = Referee.new(rules, game, 1)
-        expect(ref.do_move("A1")).to eq([[["O"," "," "],[" "," "," "],[" "," "," "]], 2]) 
+        expect(ref.do_move("A1")).to eq([["O"," "," "],[" "," "," "],[" "," "," "]]) 
     end
 
     it "Test counter increases" do
