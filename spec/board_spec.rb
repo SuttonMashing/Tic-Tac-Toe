@@ -122,15 +122,17 @@ describe "Valid move checker" do
 
     it "if there is already a cross in B1, print invalid move" do
         rules = Rules.new
+        inout = InputOutput.new
         game = Board.new([[" "," "," "],[" "," "," "],["X"," "," "]])
-        ref = Referee.new(rules, game)
+        ref = Referee.new(rules, game, 0, inout)
         expect{ref.do_move("C1")}.to output("Invalid Move!\n").to_stdout
     end
 
     it "Checks that counter doesn't increase when given an invalid move" do
         rules = Rules.new
         game = Board.new([[" "," "," "],[" "," "," "],["X"," "," "]])
-        ref = Referee.new(rules, game, 4)
+        inout = InputOutput.new
+        ref = Referee.new(rules, game, 4, inout)
         ref.do_move("C1")
         expect(ref.counter_getter).to eq(4)
     end
