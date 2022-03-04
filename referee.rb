@@ -42,9 +42,8 @@ class Referee
 
     def game_over_putter
         if @rules.game_over?(moves_remaining) == true
-            return "Game Over! It's a draw"
+            @input_output.send_output("Game Over! It's a draw")
         end
-        return ""
     end
 
     def do_move(position)
@@ -98,7 +97,7 @@ class Referee
                 exit 
             end
 
-            print game_over_putter
+            game_over_putter()
 
         end
 
