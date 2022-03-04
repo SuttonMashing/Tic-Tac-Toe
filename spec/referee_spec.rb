@@ -13,16 +13,18 @@ describe "Input" do
     it "Presents correct player with input prompt" do
         game = double("Board")
         rules = double("Rules")
-        ref = Referee.new(rules, game, 1)
-        allow(ref).to receive(:gets).and_return("C1\n")
+        inout = InputOutput.new
+        ref = Referee.new(rules, game, 1, inout)
+        allow(inout).to receive(:gets).and_return("C1\n")
         expect{ref.input}.to output("Player O it is your turn\nPlease enter your move: \n").to_stdout
     end
 
     it "Takes in input and returns position" do
         game = double("Board")
         rules = double("Rules")
-        ref = Referee.new(rules, game)
-        allow(ref).to receive(:gets).and_return("C1\n")
+        inout = InputOutput.new
+        ref = Referee.new(rules, game, 0, inout)
+        allow(inout).to receive(:gets).and_return("C1\n")
         expect{ref.input}.to output("Player X it is your turn\nPlease enter your move: \n").to_stdout
         expect(ref.input).to eq("C1")
     end
@@ -42,8 +44,9 @@ describe "Main" do
     it "Plays full game and declares a draw" do
         game = Board.new
         rules = Rules.new 
-        ref = Referee.new(rules, game)
-        allow(ref).to receive(:gets).and_return("C1", "A1", "B1", "B2", "C3", "C2", "A2", "B3", "A3")#X
+        inout = InputOutput.new
+        ref = Referee.new(rules, game, 0, inout)
+        allow(inout).to receive(:gets).and_return("C1", "A1", "B1", "B2", "C3", "C2", "A2", "B3", "A3")#X
         # allow(ref).to receive(:input).and_return("A1\n") #O
         # allow(ref).to receive(:input).and_return("B1\n") #X
         # allow(ref).to receive(:input).and_return("B2\n") #O

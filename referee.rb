@@ -35,9 +35,9 @@ class Referee
                 
             end 
         @input_output.send_output(player_turn)
-        move = @input_output.get_input
         move_prompt = "Please enter your move: "
         @input_output.send_output(move_prompt)
+        return move = @input_output.get_input
     end
 
     def game_over_putter
@@ -49,7 +49,8 @@ class Referee
 
     def do_move(position)
         if @board.valid_move?(position) == false
-            puts "Invalid Move!"
+            @input_output.send_output("Invalid Move!")
+            
         else
             @board.move(position, @counter)
             @counter += 1
