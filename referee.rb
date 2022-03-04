@@ -3,10 +3,10 @@ require_relative "board"
 
 class InputOutput
     def send_output(output)
-        #puts output
+        puts output
     end
     def get_input()
-        #return gets.chomp
+        return gets.chomp
     end
 end
 
@@ -27,15 +27,17 @@ class Referee
 
     
     def input
-        if @counter.even? 
-            puts "Player X it is your turn" 
-            puts "Please enter your move: "
-            move = gets.chomp
-        else
-            puts "Player O it is your turn"
-            puts "Please enter your move: "
-            move = gets.chomp
-        end
+            if @counter.even? 
+                player_turn = "Player X it is your turn" 
+                
+            else
+                player_turn = "Player O it is your turn"
+                
+            end 
+        @input_output.send_output(player_turn)
+        move = @input_output.get_input
+        move_prompt = "Please enter your move: "
+        @input_output.send_output(move_prompt)
     end
 
     def game_over_putter
