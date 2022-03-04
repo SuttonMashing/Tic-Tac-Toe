@@ -57,7 +57,7 @@ describe "Main" do
         # allow(ref).to receive(:input).and_return("A3\n") #X
         ref.board_printer()
         ref.main
-        expect(ref.game_over_putter).to eq("Game Over! It's a draw")
+        expect{ref.game_over_putter}.to output("Game Over! It's a draw\n").to_stdout
         #expect{ref.main}.to output("Game Over! It's a draw\n").to_stdout    
     end
 end

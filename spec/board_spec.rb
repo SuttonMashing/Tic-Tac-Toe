@@ -79,9 +79,10 @@ describe "Board" do
     it "When counter reaches 9 the message 'Game over' is printed" do
         rules = Rules.new
         game = Board.new
-        ref = Referee.new(rules, game, 8)
+        inout = InputOutput.new
+        ref = Referee.new(rules, game, 8, inout)
         ref.do_move("C1")
-        expect(ref.game_over_putter).to eq("Game Over! It's a draw")
+        expect{ref.game_over_putter}.to output("Game Over! It's a draw\n").to_stdout
     end
     
 end
