@@ -1,14 +1,7 @@
 require_relative "rules"
 require_relative "board"
+require_relative "inputoutput"
 
-class InputOutput
-    def send_output(output)
-        puts output
-    end
-    def get_input()
-        return gets.chomp
-    end
-end
 
 #Facilitate the game
 #run game, call function for winner from rules class and check for draws 
@@ -93,8 +86,11 @@ class Referee
             player = which_winner()
 
             if check_winner == true
-                puts "Game Over! #{player} wins!"
-                exit 
+                win_message = "Game Over! #{player} wins!"
+                @input_output.send_output(win_message)
+                # outputs "want to play again yes no?" #future QoL updates
+                # if input == no 
+                    exit 
             end
 
             game_over_putter()
