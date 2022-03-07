@@ -52,4 +52,49 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
                  ["O","O","X"]]
         expect(ai.best_move(board)).to eq([1, 1])    
     end
+
+    it "places an O in A3" do
+        ai = AI.new
+        board = [["O"," ","X"],
+                 ["X","O","O"],
+                 [" "," "," "]]
+        expect(ai.best_move(board)).to eq([2, 2])    
+    end
+
+    
+
 end
+
+describe "Out of two empty spaces possible, it chooses the winning space for opponent X" do
+    it "places an X in A3" do
+        ai = AI.new
+        board = [["X"," ","O"],
+                 ["O","X","X"],
+                 ["X","O"," "]]
+        expect(ai.opponent_best_move(board)).to eq([2, 2])    
+    end
+
+    it "places an X in A3" do
+        ai = AI.new
+        board = [["X"," ","O"],
+                 ["O","X","X"],
+                 [" "," "," "]]
+        expect(ai.opponent_best_move(board)).to eq([2, 2])    
+    end
+
+    it "places an X in B2" do
+        ai = AI.new
+        board = [["O"," ","O"],
+                 ["X"," ","X"],
+                 [" "," "," "]]
+        expect(ai.opponent_best_move(board)).to eq([1, 1])    
+    end
+
+    it "places an X in B2" do  #this is just a dummy test and does not reflect a realistic tic-tac-toe - show it goes to second winning spot
+        ai = AI.new
+        board = [["O"," ","O"],
+                 ["X"," ","X"],
+                 ["X"," ","X"]]
+        expect(ai.opponent_best_move(board)).to eq([2, 1])    
+    end
+end    

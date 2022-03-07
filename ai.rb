@@ -61,5 +61,21 @@ class AI
             end
         return best_move
     end    
+
+    def opponent_best_move(board)
+        dummy_board = board.dup
+        best_move = nil 
+        possible_moves = available_spaces(board)
+            possible_moves.each do |move| 
+                row = move[0]
+                col = move[1]
+                dummy_board[row][col] = "X"
+                if win_check(dummy_board) == true
+                    best_move = move
+                end 
+                dummy_board[row][col] = " "
+            end
+        return best_move
+    end    
     
 end   
