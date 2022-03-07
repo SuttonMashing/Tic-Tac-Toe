@@ -6,7 +6,7 @@ describe "first placement" do
         board = [["X","O","X"],
                  ["O","X","O"],
                  ["O","X"," "]]
-        expect(ai.available_spaces(board)).to eq("C3")    
+        expect(ai.available_spaces(board)).to eq([[2, 2]])    
     end
 end
 
@@ -16,7 +16,7 @@ describe "first placement, different position" do
         board = [["X","O"," "],
                  ["O","X","X"],
                  ["O","X","O"]]
-        expect(ai.available_spaces(board)).to eq("A3")    
+        expect(ai.available_spaces(board)).to eq([[0, 2]])    
     end
 end
 
@@ -26,7 +26,7 @@ describe "When there are multiple empty spaces, returns a list of spaces" do
         board = [["X","O"," "],
                  ["O"," ","X"],
                  [" ","X","O"]]
-        expect(ai.available_spaces(board)).to eq(["A3","B2","C1"])    
+        expect(ai.available_spaces(board)).to eq([[0, 2], [1, 1], [2, 0]])    
     end
 end
 
@@ -36,20 +36,20 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
         board = [[" ","O"," "],
                  ["O","X","X"],
                  ["O","X","X"]]
-        expect(ai.best_move(board)).to eq("A1")    
+        expect(ai.best_move(board)).to eq([0, 0])    
     end
     it "places an O in A3" do
         ai = AI.new
         board = [[" ","X"," "], 
                  ["X","O","O"],
                  ["X","X","O"]]
-        expect(ai.best_move(board)).to eq("A3")   
+        expect(ai.best_move(board)).to eq([0, 2])   
     end
     it "places an O in B2" do
         ai = AI.new
         board = [[" ","X","O"],
                  ["X"," ","X"],
                  ["O","O","X"]]
-        expect(ai.best_move(board)).to eq("B2")    
+        expect(ai.best_move(board)).to eq([1, 1])    
     end
 end

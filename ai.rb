@@ -13,46 +13,20 @@ class AI
     
     def available_spaces(board)
 
-        board_hash = {:A1 => 0, :A2 => 1, :A3 => 2, :B1 => 3, :B2 => 4, :B3 => 5, :C1 => 6, :C2 => 7, :C3 => 8}
-
-        ind_index = -1
         empty_spaces = []
         
-
-            board.each do |subarray|
-            subarray.each do |index| 
-                ind_index += 1
-                if is_empty?(index)
-                    position = board_hash.key(ind_index).to_s
-                    empty_spaces << position
-                end  
-            end 
-        end    
-        if empty_spaces.length == 1
-            return empty_spaces[0]
-        else
-            return empty_spaces
-        end         
-    end 
-
-    def row_finder(position)
-        row_position = position[0,1].capitalize.to_sym
-        row = {:A => 0, :B => 1, :C => 2}
-         if row.key?(row_position) == false            
-            return false  
-        end  
-        row[row_position]
-    end 
-    
-    def col_finder(position)
-        col_position = (position[1,1].to_i) - 1
-            if col_position.between?(0,2)
-                return col_position
-            else 
-                return false 
+            for i in 0..2 do 
+                for j in 0..2 do
+                    if is_empty?(board[i][j])
+                        empty_spaces << [i,j]
+                    end  
+                end 
             end    
-    
+        
+        return empty_spaces
+              
     end 
+
 
     def win_check(board)
         transposed_board = board.transpose
@@ -74,16 +48,14 @@ class AI
 
     def best_move(board)
         dummy_board = board.dup
-        row = nil
-        col = nil
         best_move = nil 
         possible_moves = available_spaces(board)
-            possible_moves.each do |index|
-                row = row_finder(index)
-                col = col_finder(index)
+            possible_moves.each do |move| 
+                row = move[0]
+                col = move[1]
                 dummy_board[row][col] = "O"
                 if win_check(dummy_board) == true
-                    best_move = index
+                    best_move = move
                 end 
                 dummy_board[row][col] = " "
             end
