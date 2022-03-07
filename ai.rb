@@ -35,9 +35,44 @@ class AI
         end         
     end 
 
-    def best_move(board)
-    return "A1"
+    def row_finder(position)
+        row_position = position[0,1].capitalize.to_sym
+        row = {:A => 0, :B => 1, :C => 2}
+         if row.key?(row_position) == false            
+            return false  
+        end  
+        row[row_position]
+    end 
     
+    def col_finder(position)
+        col_position = (position[1,1].to_i) - 1
+            if col_position.between?(0,2)
+                return col_position
+            else 
+                return false 
+            end    
+    
+    end 
+
+    def best_move(board)
+        row = 0
+        col = 0
+        best_move = "B2"
+        possible_moves = available_spaces(board)
+            possible_moves.each do |index|
+                row = row_finder(index)
+                col = col_finder(index)
+                if row == 0 && col == 0
+                    if (board[0] == [" ", "O", "O"]) || (board[1][0] == "O" && board[2][0] == "O") || (board[1][1] == "O" && board[2][2] == "O")
+                        best_move = index 
+                    end
+                elsif row == 0 && col == 2 
+                    if (board[0] == ["O", "O", " "]) || (board[1][2] == "O" && board[2][2] == "O") || (board[1][1] == "O" && board[2][0] == "O")
+                        best_move = index 
+                    end
+                end               
+            end
+        return best_move #only returns last value
     end    
     
-    end   
+end   
