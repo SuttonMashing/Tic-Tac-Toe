@@ -45,4 +45,11 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
                  ["X","X","O"]]
         expect(ai.best_move(board)).to eq("A3")   
     end
+    it "places an O in B2" do
+        ai = AI.new
+        board = [[" ","X","O"],
+                 ["X"," ","X"],
+                 ["O","O","X"]]
+        expect(ai.best_move(board)).to eq("B2")    
+    end
 end

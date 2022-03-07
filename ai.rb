@@ -54,25 +54,40 @@ class AI
     
     end 
 
+    def win_check(board)
+        transposed_board = board.transpose
+        if board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != " " 
+            return true
+        elsif board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != " " 
+            return true
+        elsif board[0].all? {|x| x == board[0][0] } && board[0][0] != " " || board[1].all? {|x| x == board[1][0] } && board[1][0] != " "  || board[2].all? {|x| x == board[2][0] } && board[2][0] != " "    
+            return true
+
+        elsif transposed_board[0].all? {|x| x == transposed_board[0][0] } && transposed_board[0][0] != " " || transposed_board[1].all? {|x| x == transposed_board[1][0] } && transposed_board[1][0] != " " || transposed_board[2].all? {|x| x == transposed_board[2][0] } && transposed_board[2][0] != " "
+           return true #[[a,b],[c,d]] > [[a,c],[b,d]] 
+
+        else
+            return false
+        end
+
+    end
+
     def best_move(board)
-        row = 0
-        col = 0
-        best_move = "B2"
+        dummy_board = board.dup
+        row = nil
+        col = nil
+        best_move = nil 
         possible_moves = available_spaces(board)
             possible_moves.each do |index|
                 row = row_finder(index)
                 col = col_finder(index)
-                if row == 0 && col == 0
-                    if (board[0] == [" ", "O", "O"]) || (board[1][0] == "O" && board[2][0] == "O") || (board[1][1] == "O" && board[2][2] == "O")
-                        best_move = index 
-                    end
-                elsif row == 0 && col == 2 
-                    if (board[0] == ["O", "O", " "]) || (board[1][2] == "O" && board[2][2] == "O") || (board[1][1] == "O" && board[2][0] == "O")
-                        best_move = index 
-                    end
-                end               
+                dummy_board[row][col] = "O"
+                if win_check(dummy_board) == true
+                    best_move = index
+                end 
+                dummy_board[row][col] = " "
             end
-        return best_move #only returns last value
+        return best_move
     end    
     
 end   
