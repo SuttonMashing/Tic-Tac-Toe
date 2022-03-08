@@ -97,4 +97,24 @@ describe "Out of two empty spaces possible, it chooses the winning space for opp
                  ["X"," ","X"]]
         expect(ai.opponent_best_move(board)).to eq([2, 1])    
     end
-end    
+end   
+
+describe "minimax function" do
+    it "returns a score of 1 for below board" do
+        ai = AI.new
+        board = [["O","X","O"], 
+                 ["X","O","O"],
+                 ["X","X","O"]]
+        expect(ai.minimax(board, true)).to eq(1)    
+    end
+end
+
+describe "win_check" do
+    it "returns a draw for full board" do
+        ai = AI.new
+        board = [["O","X","O"], 
+                 ["X","O","O"],
+                 ["X","O","X"]]
+        expect(ai.win_check(board)).to eq("draw")    
+    end
+end

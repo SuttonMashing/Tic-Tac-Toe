@@ -29,35 +29,53 @@ class AI
 
 
     def win_check(board)
+        winner = nil
         transposed_board = board.transpose
         if board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != " " 
-            return true
+            winner = board[0][0]
+        
         elsif board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != " " 
-            return true
-        elsif board[0].all? {|x| x == board[0][0] } && board[0][0] != " " || board[1].all? {|x| x == board[1][0] } && board[1][0] != " "  || board[2].all? {|x| x == board[2][0] } && board[2][0] != " "    
-            return true
+            winner = board[0][2]
+        
+        elsif board[0].all? {|x| x == board[0][0] } && board[0][0] != " "    
+            winner = board[0][0]
+        
+        elsif board[1].all? {|x| x == board[1][0] } && board[1][0] != " " 
+            winner = board[1][0]
 
-        elsif transposed_board[0].all? {|x| x == transposed_board[0][0] } && transposed_board[0][0] != " " || transposed_board[1].all? {|x| x == transposed_board[1][0] } && transposed_board[1][0] != " " || transposed_board[2].all? {|x| x == transposed_board[2][0] } && transposed_board[2][0] != " "
-           return true #[[a,b],[c,d]] > [[a,c],[b,d]] 
+        elsif board[2].all? {|x| x == board[2][0] } && board[2][0] != " "   
+            winner = board[2][0]
 
-        else
-            return false
-        end
+        elsif transposed_board[0].all? {|x| x == transposed_board[0][0] } && transposed_board[0][0] != " " 
+            winner = transposed_board[0][0]
+        
+        elsif transposed_board[1].all? {|x| x == transposed_board[1][0] } && transposed_board[1][0] != " " 
+            winner = transposed_board[1][0]
+
+        elsif transposed_board[2].all? {|x| x == transposed_board[2][0] } && transposed_board[2][0] != " "
+            winner = transposed_board[2][0]
+        elsif available_spaces(board) == []
+            winner = "draw"
+        end 
+        return winner 
 
     end
 
     def best_move(board)
         dummy_board = board.dup
         best_move = nil 
+        best_score = -100
         possible_moves = available_spaces(board)
             possible_moves.each do |move| 
                 row = move[0]
                 col = move[1]
                 dummy_board[row][col] = "O"
-                if win_check(dummy_board) == true
+                score = minimax(board, true)
+                dummy_board[row][col] = " "
+                if score > best_score
+                    best_score = score
                     best_move = move
                 end 
-                dummy_board[row][col] = " "
             end
         return best_move
     end    
@@ -70,12 +88,51 @@ class AI
                 row = move[0]
                 col = move[1]
                 dummy_board[row][col] = "X"
-                if win_check(dummy_board) == true
+                score = minimax(board, false)
+                dummy_board[row][col] = " "
+                if score > best_score
+                    best_score = score
                     best_move = move
                 end 
-                dummy_board[row][col] = " "
             end
         return best_move
     end    
     
+    def minimax(board, maxmising)
+        result = win_check(board)
+        score_hash = {"X" => -1, "O" => 1, "draw" => 0}
+        if result != nil 
+            return score_hash[result]
+        end
+        if maxmising
+            max_score = -100
+            possible_moves = available_spaces(board)
+            possible_moves.each do |move| 
+                row = move[0]
+                col = move[1]
+                board[row][col] = "O"
+                score = minimax(board, false)
+                board[row][col] = " "
+                if score > max_score
+                    max_score = score
+                end
+            end
+            return max_score
+        else 
+            min_score = -100
+            possible_moves = available_spaces(board)
+            possible_moves.each do |move| 
+                row = move[0]
+                col = move[1]
+                board[row][col] = "O"
+                score = minimax(board, true)
+                board[row][col] = " "
+                if score < max_score
+                    min_score = score
+                end
+            end
+            return min_score
+        end
+        
+    end
 end   
