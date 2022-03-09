@@ -83,14 +83,20 @@ class AI
         return best_move
     end   
     
-    
-    def minimax(board)
+    def scores(board)
         if win_check(board) == "O"
             return 1
         elsif win_check(board) == "X"
             return -1
         elsif win_check(board) == false && available_spaces(board) == []
             return 0   
+        end    
+    end
+
+    def minimax(board)
+        result = scores(board)
+        if result != nil
+            return result
         else 
             return "this is a case we haven't planned for"     
         end    
