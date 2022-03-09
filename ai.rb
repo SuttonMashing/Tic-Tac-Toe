@@ -76,6 +76,15 @@ class AI
                 dummy_board[row][col] = " "
             end
         return best_move
+    end   
+    
+    
+    def minimax(board)
+        if win_check(board) == true
+            return 1
+        elsif available_spaces(board) == []
+            return 0    
+        end    
     end    
     
 end   
