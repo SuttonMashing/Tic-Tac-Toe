@@ -90,12 +90,12 @@ describe "Out of two empty spaces possible, it chooses the winning space for opp
         expect(ai.opponent_best_move(board)).to eq([1, 1])    
     end
 
-    it "places an X in B2" do  #this is just a dummy test and does not reflect a realistic tic-tac-toe - show it goes to second winning spot
+    it "places an X in B2" do 
         ai = AI.new
         board = [["O"," ","O"],
                  ["X"," ","X"],
                  ["X"," ","X"]]
-        expect(ai.opponent_best_move(board)).to eq([2, 1])    
+        expect(ai.opponent_best_move(board)).to eq([1, 1])    
     end
 end  
 
@@ -115,5 +115,13 @@ describe "Minimax" do
                  ["O","X","O"],
                  ["O","X","O"]]
         expect(ai.minimax(board)).to eq(0)    
+    end
+
+    it "return -1 for a winning X board" do
+        ai = AI.new
+        board = [["O","O","X"],
+                 ["X","X","X"],
+                 ["O","X","O"]]
+        expect(ai.minimax(board)).to eq(-1)    
     end
 end    
