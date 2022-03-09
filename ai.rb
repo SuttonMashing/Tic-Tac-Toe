@@ -93,13 +93,40 @@ class AI
         end    
     end
 
-    def minimax(board)
+    def minimax(board, player)
         result = scores(board)
         if result != nil
             return result
-        else 
-            return "this is a case we haven't planned for"     
         end    
+        if player == "O"
+            max_score = -5
+            possible_moves = available_spaces(board)
+            possible_moves.each do |move| 
+                row = move[0]
+                col = move[1]
+                board[row][col] = "O"
+                score = minimax(board, "X")
+                if score > max_score
+                    max_score = score
+                end
+                board[row][col] = " "
+            end
+            return max_score
+        elsif player == "X"
+            min_score = 5
+            possible_moves = available_spaces(board)
+            possible_moves.each do |move| 
+                row = move[0]
+                col = move[1]
+                board[row][col] = "X"
+                score = minimax(board, "O") 
+                if score < min_score
+                    min_score = score
+                end
+                board[row][col] = " "
+            end
+            return min_score
+        end 
     end    
     
 end   
