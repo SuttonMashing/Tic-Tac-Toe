@@ -132,4 +132,20 @@ describe "Minimax" do
                  ["X","X","O"]]
         expect(ai.minimax(board, "O")).to eq(1)    
     end
+
+    it "return -1 for a winning X board in 1 move" do
+        ai = AI.new
+        board = [["X","O"," "],
+                 ["X","X","O"],
+                 ["O","X"," "]]
+        expect(ai.minimax(board, "X")).to eq(-1)    
+    end
+
+    it "return 0 for a board that will draw in 2 moves" do
+        ai = AI.new
+        board = [["X"," ","O"],
+                 ["O","X","X"],
+                 ["X"," ","O"]]
+        expect(ai.minimax(board, "O")).to eq(0)    
+    end
 end    
