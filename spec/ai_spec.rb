@@ -40,8 +40,8 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
     end
     it "places an O in A3" do
         ai = AI.new
-        board = [[" ","X"," "], 
-                 ["X","O","O"],
+        board = [[" ","O"," "], 
+                 ["X","X","O"],
                  ["X","X","O"]]
         expect(ai.best_move(board)).to eq([0, 2])   
     end
@@ -53,7 +53,7 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
         expect(ai.best_move(board)).to eq([1, 1])    
     end
 
-    it "places an O in A3" do
+    it "places an O in C3" do
         ai = AI.new
         board = [["O"," ","X"],
                  ["X","O","O"],
@@ -149,3 +149,13 @@ describe "Minimax" do
         expect(ai.minimax(board, "O")).to eq(0)    
     end
 end    
+
+describe "win check returns winner for board"
+    it "return X for a winniboard that will draw in 2 moves" do
+        ai = AI.new
+        board = [["X"," ","O"],
+                ["O","X","X"],
+                ["X"," ","O"]]
+        expect(ai.minimax(board, "O")).to eq(0)    
+    end
+end 

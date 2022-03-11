@@ -55,15 +55,18 @@ class AI
 
     def best_move(board)
         best_move = nil 
+        best_score = -100
         possible_moves = available_spaces(board)
             possible_moves.each do |move| 
                 row = move[0]
                 col = move[1]
                 board[row][col] = "O"
-                if win_check(board) == "O"
-                    best_move = move
-                end 
+                score = minimax(board, "X")
                 board[row][col] = " "
+                if score > best_score
+                    best_move = move
+                    best_score = score
+                end
             end
         return best_move
     end    
