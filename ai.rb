@@ -55,15 +55,18 @@ class AI
 
     def best_move(board)
         best_move = nil 
-        possible_moves = available_spaces(board)
+        best_score = -100
+        possible_moves = available_spaces(board) 
             possible_moves.each do |move| 
                 row = move[0]
                 col = move[1]
                 board[row][col] = "O"
-                if win_check(board) == "O"
-                    best_move = move
-                end 
+                score = minimax(board, 0, "X")
                 board[row][col] = " "
+                if score > best_score
+                    best_move = move
+                    best_score = score
+                end 
             end
         return best_move
     end    
@@ -93,7 +96,7 @@ class AI
         end    
     end
 
-    def minimax(board, player)
+    def minimax(board, depth, player)
         result = scores(board)
         if result != nil
             return result
@@ -105,9 +108,9 @@ class AI
                 row = move[0]
                 col = move[1]
                 board[row][col] = "O"
-                score = minimax(board, "X")
+                score = minimax(board, depth + 1, "X")
                 if score > max_score
-                    max_score = score
+                    max_score = score - depth
                 end
                 board[row][col] = " "
             end
@@ -119,9 +122,9 @@ class AI
                 row = move[0]
                 col = move[1]
                 board[row][col] = "X"
-                score = minimax(board, "O") 
+                score = minimax(board, depth +1, "O") 
                 if score < min_score
-                    min_score = score
+                    min_score = score 
                 end
                 board[row][col] = " "
             end
