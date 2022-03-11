@@ -88,7 +88,7 @@ class AI
             return result
         end    
         if player == "O"
-            max_score = -5
+            max_score = -100
             possible_moves = available_spaces(board)
             possible_moves.each do |move| 
                 row = move[0]
@@ -96,13 +96,13 @@ class AI
                 board[row][col] = "O"
                 score = minimax(board, depth + 1, "X")
                 if score > max_score
-                    max_score = score 
+                    max_score = score
                 end
                 board[row][col] = " "
             end
             return max_score
         elsif player == "X"
-            min_score = 5
+            min_score = 100
             possible_moves = available_spaces(board)
             possible_moves.each do |move| 
                 row = move[0]

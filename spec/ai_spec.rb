@@ -147,6 +147,14 @@ describe "Minimax" do
         expect(ai.minimax(board, 0, "O")).to eq(1)    
     end
 
+    it "return 1 for a winning vertical O board" do
+        ai = AI.new
+        board = [["O"," ","O"],
+                 ["X","X","O"],
+                 ["X","X","O"]]
+        expect(ai.minimax(board, 0, "O")).to eq(1)    
+    end
+
     it "return -1 for a winning X board in 1 move" do
         ai = AI.new
         board = [["X","O"," "],
