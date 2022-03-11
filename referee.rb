@@ -117,10 +117,10 @@ class Referee
 
 end
 
-board = Board.new
-inout = InputOutput.new
-ai = AI.new
-rules = Rules.new
-ref = Referee.new(rules, board, 0, inout, ai)
-# # # if not commented out you MUST play to test 
-ref.main
+# board = Board.new
+# inout = InputOutput.new
+# ai = AI.new
+# rules = Rules.new
+# ref = Referee.new(rules, board, 0, inout, ai)
+# # # # if not commented out you MUST play to test 
+# ref.main

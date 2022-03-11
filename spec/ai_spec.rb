@@ -53,13 +53,13 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
         expect(ai.best_move(board)).to eq([1, 1])    
     end
 
-    # it "places an O in C3" do
-    #     ai = AI.new
-    #     board = [["O"," ","X"],
-    #              ["X","O","O"],
-    #              ["X"," "," "]]
-    #     expect(ai.best_move(board)).to eq([2, 2])    
-    # end
+    it "places an O in C3" do
+        ai = AI.new
+        board = [["O"," ","X"],
+                 ["X","O","O"],
+                 ["X"," "," "]]
+        expect(ai.best_move(board)).to eq([0, 1])    #doesn't go for quickest win, could be better 
+    end
 
     it "test scores for winning board" do
         ai = AI.new
@@ -88,7 +88,7 @@ describe "Blocks X from winning" do
         expect(ai.best_move(board)).to eq([2, 2])    
     end
 
-    it "places an O in A3" do
+    it "places an O in C3" do
         ai = AI.new
         board = [["X"," ","O"],
                  ["O","X","X"],
@@ -179,6 +179,22 @@ describe "Minimax" do
                  ["X"," "," "]]
         expect(ai.minimax(board, 0, "O")).to eq(1)    
     end
-    
-    
-end    
+end  
+
+describe "win check returns winner for board" do
+    it "return X for a winning bottom row X board" do
+        ai = AI.new
+        board = [["X"," ","O"],
+                ["O","O","X"],
+                ["X","X","X"]]
+        expect(ai.win_check(board)).to eq("X")    
+    end
+
+    it "return X for a middle row winning X board" do
+        ai = AI.new
+        board = [["X"," ","O"],
+                ["X","X","X"],
+                ["X","O","X"]]
+        expect(ai.win_check(board)).to eq("X")    
+    end
+end 

@@ -38,7 +38,7 @@ class AI
             return board[0][0]
         elsif  board[1].all? {|x| x == board[1][0] } && board[1][0] != " "  
             return board[1][0]
-         board[2].all? {|x| x == board[2][0] } && board[2][0] != " "    
+        elsif board[2].all? {|x| x == board[2][0] } && board[2][0] != " "    
             return board[2][0]
         elsif transposed_board[0].all? {|x| x == transposed_board[0][0] } && transposed_board[0][0] != " " 
             return board[0][0]
@@ -56,11 +56,7 @@ class AI
     def best_move(board)
         best_move = nil 
         best_score = -100
-<<<<<<< HEAD
-        possible_moves = available_spaces(board)
-=======
         possible_moves = available_spaces(board) 
->>>>>>> 0e43bafa661e51538ab60b2f5c8152a1c03022d3
             possible_moves.each do |move| 
                 row = move[0]
                 col = move[1]
@@ -100,7 +96,7 @@ class AI
                 board[row][col] = "O"
                 score = minimax(board, depth + 1, "X")
                 if score > max_score
-                    max_score = score
+                    max_score = score 
                 end
                 board[row][col] = " "
             end
