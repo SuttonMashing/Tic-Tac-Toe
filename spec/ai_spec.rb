@@ -53,49 +53,63 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
         expect(ai.best_move(board)).to eq([1, 1])    
     end
 
-    it "places an O in C3" do
+    # it "places an O in C3" do
+    #     ai = AI.new
+    #     board = [["O"," ","X"],
+    #              ["X","O","O"],
+    #              ["X"," "," "]]
+    #     expect(ai.best_move(board)).to eq([2, 2])    
+    # end
+
+    it "test scores for winning board" do
         ai = AI.new
         board = [["O"," ","X"],
                  ["X","O","O"],
-                 [" "," "," "]]
-        expect(ai.best_move(board)).to eq([2, 2])    
+                 ["X"," ","O"]]
+        expect(ai.scores(board)).to eq(1)    
     end
 
-    
+    it "check weird logic scores might have" do
+        ai = AI.new
+        board = [["O","O","X"],
+                 ["X","O","O"],
+                 ["X"," "," "]]
+        expect(ai.scores(board)).to eq(nil)    
+    end
 
 end
 
-describe "Out of two empty spaces possible, it chooses the winning space for opponent X" do
-    it "places an X in A3" do
+describe "Blocks X from winning" do
+    it "places an O in A3" do
         ai = AI.new
         board = [["X"," ","O"],
                  ["O","X","X"],
                  ["X","O"," "]]
-        expect(ai.opponent_best_move(board)).to eq([2, 2])    
+        expect(ai.best_move(board)).to eq([2, 2])    
     end
 
-    it "places an X in A3" do
+    it "places an O in A3" do
         ai = AI.new
         board = [["X"," ","O"],
                  ["O","X","X"],
                  [" "," "," "]]
-        expect(ai.opponent_best_move(board)).to eq([2, 2])    
+        expect(ai.best_move(board)).to eq([2, 2])    
     end
 
-    it "places an X in B2" do
+    it "places an O in A2" do
         ai = AI.new
         board = [["O"," ","O"],
                  ["X"," ","X"],
                  [" "," "," "]]
-        expect(ai.opponent_best_move(board)).to eq([1, 1])    
+        expect(ai.best_move(board)).to eq([0, 1])    
     end
 
-    it "places an X in B2" do 
+    it "places an O in B2" do 
         ai = AI.new
-        board = [["O"," ","O"],
+        board = [["X"," ","O"],
                  ["X"," ","X"],
-                 ["X"," ","X"]]
-        expect(ai.opponent_best_move(board)).to eq([1, 1])    
+                 ["O"," ","X"]]
+        expect(ai.best_move(board)).to eq([1, 1])    
     end
 end  
 
@@ -105,7 +119,7 @@ describe "Minimax" do
         board = [["X","X","O"],
                  ["O","O","O"],
                  ["X","O","X"]]
-        expect(ai.minimax(board, "O")).to eq(1)    
+        expect(ai.minimax(board, 0, "O")).to eq(1)    
     end
 
 
@@ -114,7 +128,7 @@ describe "Minimax" do
         board = [["X","O","X"],
                  ["O","X","O"],
                  ["O","X","O"]]
-        expect(ai.minimax(board, "O")).to eq(0)    
+        expect(ai.minimax(board, 0, "O")).to eq(0)    
     end
 
     it "return -1 for a winning X board" do
@@ -122,7 +136,7 @@ describe "Minimax" do
         board = [["O","O","X"],
                  ["X","X","X"],
                  ["O","X","O"]]
-        expect(ai.minimax(board, "X")).to eq(-1)    
+        expect(ai.minimax(board, 0, "X")).to eq(-1)    
     end
 
     it "return 1 for a winning O board in 1 move" do
@@ -130,7 +144,15 @@ describe "Minimax" do
         board = [["O"," "," "],
                  ["X","X","O"],
                  ["X","X","O"]]
-        expect(ai.minimax(board, "O")).to eq(1)    
+        expect(ai.minimax(board, 0, "O")).to eq(1)    
+    end
+
+    it "return 1 for a winning vertical O board" do
+        ai = AI.new
+        board = [["O"," ","O"],
+                 ["X","X","O"],
+                 ["X","X","O"]]
+        expect(ai.minimax(board, 0, "O")).to eq(1)    
     end
 
     it "return -1 for a winning X board in 1 move" do
@@ -138,7 +160,7 @@ describe "Minimax" do
         board = [["X","O"," "],
                  ["X","X","O"],
                  ["O","X"," "]]
-        expect(ai.minimax(board, "X")).to eq(-1)    
+        expect(ai.minimax(board, 0, "X")).to eq(-1)    
     end
 
     it "return 0 for a board that will draw in 2 moves" do
@@ -146,16 +168,17 @@ describe "Minimax" do
         board = [["X"," ","O"],
                  ["O","X","X"],
                  ["X"," ","O"]]
-        expect(ai.minimax(board, "O")).to eq(0)    
+        expect(ai.minimax(board, 0, "O")).to eq(0)  
+          
     end
-end    
 
-describe "win check returns winner for board"
-    it "return X for a winniboard that will draw in 2 moves" do
+    it "returns 1 for O winning in 1 move" do
         ai = AI.new
-        board = [["X"," ","O"],
-                ["O","X","X"],
-                ["X"," ","O"]]
-        expect(ai.minimax(board, "O")).to eq(0)    
+        board = [["O"," ","X"],
+                 ["X","O","O"],
+                 ["X"," "," "]]
+        expect(ai.minimax(board, 0, "O")).to eq(1)    
     end
-end 
+    
+    
+end    

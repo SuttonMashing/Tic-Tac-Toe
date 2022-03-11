@@ -12,11 +12,14 @@ describe "Input" do
 
     it "Presents correct player with input prompt" do
         game = double("Board")
+        ai = AI.new
         rules = double("Rules")
         inout = InputOutput.new
-        ref = Referee.new(rules, game, 1, inout)
-        allow(inout).to receive(:gets).and_return("C1\n")
-        expect{ref.input}.to output("Player O it is your turn\nPlease enter your move: \n").to_stdout
+        ref = Referee.new(rules, game, 1, inout, ai)
+        allow(game).to receive(:board_getter).and_return([[" ","O"," "],
+            ["O","X","X"],
+            ["O","X","X"]])
+        expect{ref.input}.to output("Player O is taking its turn\n").to_stdout
     end
 
     it "Takes in input and returns position" do
@@ -27,6 +30,17 @@ describe "Input" do
         allow(inout).to receive(:gets).and_return("C1\n")
         expect{ref.input}.to output("Player X it is your turn\nPlease enter your move: \n").to_stdout
         expect(ref.input).to eq("C1")
+    end
+
+    it "Takes in ai input and returns position" do
+        game = Board.new([[" ","O"," "],
+                          ["O","X","X"],
+                          ["O","X","X"]])
+        rules = double("Rules")
+        inout = InputOutput.new
+        ai = AI.new
+        ref = Referee.new(rules, game, 8, inout, ai)
+        expect(ref.ai_move).to eq("A1")
     end
     
 end
@@ -44,9 +58,10 @@ describe "Main" do
     it "Plays full game and declares a draw" do
         game = Board.new
         rules = Rules.new 
+        ai = AI.new
         inout = InputOutput.new
-        ref = Referee.new(rules, game, 0, inout)
-        allow(inout).to receive(:gets).and_return("C1", "A1", "B1", "B2", "C3", "C2", "A2", "B3", "A3")
+        ref = Referee.new(rules, game, 0, inout, ai)
+        allow(inout).to receive(:gets).and_return("C1", "A1", "A3", "B2", "C3", "C2", "A2", "B3", "A3")
         ref.board_printer()
         ref.main
         expect{ref.game_over_putter}.to output("Game Over! It's a draw\n").to_stdout  
