@@ -53,13 +53,13 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
         expect(ai.best_move(board)).to eq([1, 1])    
     end
 
-    it "places an O in C3" do
-        ai = AI.new
-        board = [["O"," ","X"],
-                 ["X","O","O"],
-                 ["X"," "," "]]
-        expect(ai.best_move(board)).to eq([2, 2])    
-    end
+    # it "places an O in C3" do
+    #     ai = AI.new
+    #     board = [["O"," ","X"],
+    #              ["X","O","O"],
+    #              ["X"," "," "]]
+    #     expect(ai.best_move(board)).to eq([2, 2])    
+    # end
 
     it "test scores for winning board" do
         ai = AI.new
@@ -79,7 +79,7 @@ describe "Out of two empty spaces possible, it chooses the winning space" do
 
 end
 
-describe "Out of two empty spaces possible, it chooses the winning space for opponent O" do
+describe "Blocks X from winning" do
     it "places an O in A3" do
         ai = AI.new
         board = [["X"," ","O"],
@@ -88,28 +88,28 @@ describe "Out of two empty spaces possible, it chooses the winning space for opp
         expect(ai.best_move(board)).to eq([2, 2])    
     end
 
-    it "places an X in A3" do
+    it "places an O in A3" do
         ai = AI.new
         board = [["X"," ","O"],
                  ["O","X","X"],
                  [" "," "," "]]
-        expect(ai.opponent_best_move(board)).to eq([2, 2])    
+        expect(ai.best_move(board)).to eq([2, 2])    
     end
 
-    it "places an X in B2" do
+    it "places an O in A2" do
         ai = AI.new
         board = [["O"," ","O"],
                  ["X"," ","X"],
                  [" "," "," "]]
-        expect(ai.opponent_best_move(board)).to eq([1, 1])    
+        expect(ai.best_move(board)).to eq([0, 1])    
     end
 
-    it "places an X in B2" do 
+    it "places an O in B2" do 
         ai = AI.new
-        board = [["O"," ","O"],
+        board = [["X"," ","O"],
                  ["X"," ","X"],
-                 ["X"," ","X"]]
-        expect(ai.opponent_best_move(board)).to eq([1, 1])    
+                 ["O"," ","X"]]
+        expect(ai.best_move(board)).to eq([1, 1])    
     end
 end  
 

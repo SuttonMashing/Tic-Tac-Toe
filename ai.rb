@@ -70,21 +70,7 @@ class AI
             end
         return best_move
     end    
-
-    def opponent_best_move(board)
-        best_move = nil 
-        possible_moves = available_spaces(board)
-            possible_moves.each do |move| 
-                row = move[0]
-                col = move[1]
-                board[row][col] = "X"
-                if win_check(board) == "X"
-                    best_move = move
-                end 
-                board[row][col] = " "
-            end
-        return best_move
-    end   
+ 
     
     def scores(board)
         if win_check(board) == "O"
@@ -110,7 +96,7 @@ class AI
                 board[row][col] = "O"
                 score = minimax(board, depth + 1, "X")
                 if score > max_score
-                    max_score = score - depth
+                    max_score = score 
                 end
                 board[row][col] = " "
             end
