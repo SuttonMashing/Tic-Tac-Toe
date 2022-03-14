@@ -87,13 +87,10 @@ class Referee
         win_message = "Game Over! #{player} wins!"
     end
 
-
-
-
     def main
         
         while @counter < 9
-            position = input #[1,2] #A3
+            position = input 
 
             current_board = do_move(position)
 
@@ -104,17 +101,9 @@ class Referee
                 @input_output.send_output(win_printer(player))
                 exit 
             end
-
             game_over_putter()
-
         end
-
-        
     end
-
-   
-
-
 end
 
 # board = Board.new

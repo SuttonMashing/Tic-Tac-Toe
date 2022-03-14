@@ -1,6 +1,5 @@
 
-
-#contains functions for making a move, stores baord as object inside itself, breaks down input
+#contains functions for making a move, stores board as object inside itself, breaks down input
 class Board
 
     def initialize(board = [[" "," "," "],[" "," "," "],[" "," "," "]])
@@ -19,7 +18,6 @@ class Board
             return false
             
         elsif @board[row][col] == "X" or @board[row][col] == "O"
-                # puts "Invalid Move!"
                 return false
         else 
             return true        
@@ -31,9 +29,8 @@ class Board
             return @board
     
         end   
-        row = row_finder(position) #use row finder to give row on board
-        col = col_finder(position) #use col finder to give col on board
-
+        row = row_finder(position) 
+        col = col_finder(position) 
         if @board[row][col] == " " && counter.even?  
           @board[row][col] = "X"  
           return @board
@@ -46,9 +43,6 @@ class Board
         # 1, 2, 3 are columns represented by each position in the subarray
 
     end
-
-   
-    
     
     def row_finder(position)
         row_position =  position[0,1].capitalize.to_sym
@@ -66,7 +60,6 @@ class Board
             else 
                 return false 
             end    
-    
     end 
 
     def print_board()
@@ -75,7 +68,6 @@ class Board
             puts r.each { |p| p }.join("|")
             puts "-----"
         end
-    
     end 
     
 

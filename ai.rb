@@ -1,7 +1,5 @@
 class AI
 
-    
-
     def is_empty?(x)
     
         if x == "X" or x == "O"        
@@ -55,7 +53,7 @@ class AI
 
     def best_move(board)
         best_move = nil 
-        best_score = -100
+        best_score = -10000
         possible_moves = available_spaces(board) 
             possible_moves.each do |move| 
                 row = move[0]
@@ -74,9 +72,9 @@ class AI
     
     def scores(board)
         if win_check(board) == "O"
-            return 1
+            return 100
         elsif win_check(board) == "X"
-            return -1
+            return -100
         elsif win_check(board) == false && available_spaces(board) == []
             return 0   
         end    
@@ -88,21 +86,22 @@ class AI
             return result
         end    
         if player == "O"
-            max_score = -100
+            max_score = -10000
             possible_moves = available_spaces(board)
             possible_moves.each do |move| 
                 row = move[0]
                 col = move[1]
                 board[row][col] = "O"
                 score = minimax(board, depth + 1, "X")
-                if score > max_score
-                    max_score = score 
+                if score > max_score 
+                    max_score = score - depth 
                 end
                 board[row][col] = " "
             end
             return max_score
         elsif player == "X"
-            min_score = 100
+            min_score = 10000
+            min_depth = 20
             possible_moves = available_spaces(board)
             possible_moves.each do |move| 
                 row = move[0]

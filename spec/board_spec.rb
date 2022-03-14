@@ -177,27 +177,3 @@ describe "Valid move checker" do
     end
 
 end
-
-
-
-# it "While counter < 9 the main function takes an input move" do
-    #     # Arrange
-    #     game = Game.new(8)
-    #     expected_output = a_string_starting_with("Please enter your move: ")
-    #     allow(game).to receive(:gets).and_return("C1\n")
-
-    #     # Assert
-    #     expect{game.main}.to output(expected_output).to_stdout
-    # end
-
-
-    # it "will return zero moves when all moves are used up" do
-    #     # Arrange
-    #     game_logic = double("GameLogic")
-    #     expect(game_logic).to receive("take_move").and_return(0)
-    #     expected_output = "No moves left"
-    #     game = Game.new(4)        
-
-    #     # Assert
-    #     expect{game.take_input}.to output(expected_output).to_stdout
-    # end
